@@ -3,7 +3,7 @@ import neartoken1 from '../assets/neartoken1.png'
 import zootoken from '../assets/zootoken.png'
 
 
-export default function Card({ image, series, title, price, tag, time, buyVisible }) {
+export default function Card({ image, series, title, price, tag, time, buyVisible, buttonText, bidText }) {
     return (
         <div className="card">
             <div className="card-image">
@@ -12,7 +12,7 @@ export default function Card({ image, series, title, price, tag, time, buyVisibl
             <div className="card-content">
                 <div className="card-heading">
                     <span className="card-series">{series}</span>
-                    <span className="card-top">Top bid</span>
+                    <span className="card-top">{bidText}</span>
                 </div>
                 <div className="card-details">
                     <h4 className="card-title">{title}</h4>
@@ -25,7 +25,7 @@ export default function Card({ image, series, title, price, tag, time, buyVisibl
                     <span>@{tag}</span>
                     <span>{time} sold</span>
                 </div>
-                <button className={`${buyVisible ? "" : "buy-visible"}`}>Buy Now</button>
+                <button className={`${buyVisible ? "" : "buy-visible"}`}>{buttonText}</button>
             </div>
         </div>
     );

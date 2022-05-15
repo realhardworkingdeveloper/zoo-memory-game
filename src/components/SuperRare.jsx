@@ -14,7 +14,9 @@ export default function SuperRare() {
             price: 2.99,
             tag: "zoo.near",
             time: 4,
-            buyVisible: true
+            buyVisible: true,
+            buttonText: "STAKE",
+            bidText: "Top Bid"
         },
         {
             image: chickenRare,
@@ -23,7 +25,9 @@ export default function SuperRare() {
             price: 2.99,
             tag: "zoo.near",
             time: 5,
-            buyVisible: true
+            buyVisible: true,
+            buttonText: "STAKING...",
+            bidText: "Top Bid"
         },
         {
             image: deerRare,
@@ -32,7 +36,8 @@ export default function SuperRare() {
             price: 2.99,
             tag: "zoo.near",
             time: 12,
-            buyVisible: true
+            buyVisible: false,
+            bidText: "Top Bid"
         },
         {
             image: foxRare,
@@ -41,7 +46,8 @@ export default function SuperRare() {
             price: 2.99,
             tag: "zoo.near",
             time: 9,
-            buyVisible: true
+            buyVisible: false,
+            bidText: "Top Bid"
         },
     ];
 
@@ -55,7 +61,7 @@ export default function SuperRare() {
                 </p>
             </div>
             <div className="cards">
-                {data.map(({ image, series, title, price, tag, time, buyVisible }, index) => (
+                {data.map(({ image, series, title, price, tag, time, buyVisible, buttonText, bidText }, index) => (
                     <Card
                         image={image}
                         series={series}
@@ -64,6 +70,8 @@ export default function SuperRare() {
                         tag={tag}
                         time={time}
                         buyVisible={buyVisible}
+                        buttonText={buttonText}
+                        bidText={bidText}
                         key={index}
                     />
                 ))}
