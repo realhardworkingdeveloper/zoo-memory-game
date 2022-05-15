@@ -1,0 +1,57 @@
+.card {
+    background-color: var(--card-color);
+    width: max-content;
+    border-radius: 1rem;
+
+    &-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1rem;
+
+        .card-heading {
+            display: flex;
+            justify-content: space-between;
+
+            .card-series {
+                color: var(--orange);
+                text-transform: uppercase;
+                font-size: 0.7rem
+            }
+
+            .card-top {
+                color: var(--accent-color3);
+                text-transform: uppercase;
+                font-size: 0.7rem;
+            }
+        }
+
+        .card-details {
+            display: flex;
+            justify-content: space-between;
+            color: var(--accent-color1);
+
+            .card-price {
+                display: flex;
+                gap: 0.5rem;
+            }
+
+            img {
+                filter: brightness(0) invert(1);
+            }
+
+
+        }
+
+        .card-sub-details {
+            display: flex;
+            justify-content: space-between;
+
+            span {
+                color: var(--accent-color3);
+                font-size: 0.9rem;
+            }
+        }
+    }
+
+}

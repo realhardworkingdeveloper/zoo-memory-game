@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --orange: #ff8139;
+    --pink: #ff3998;
+    --green: #39ffa0;
+    --red: #ff3939;
+    --light-green: #edfff6;
+    --light-orange: #fff0e8;
+    --accent-color1: #ffffff;
+    --accent-color2: #555555;
+    --accent-color3: #cccccc;
+    --card-color: #000000;
+    --background: #001233;
+    --font-family: "Inter", sans-serif;
+    --e-global-color-primary: #001233;
+    --e-global-color-secondary: #012A4A;
+    --e-global-color-text: #FFFFFF;
+    --e-global-color-accent: #72EFDD;
+    --e-global-color-0094cc7: #B5179E;
+    --e-global-color-993e647: #5192D9;
+    --e-global-color-091a63f: #E3B065;
+    --e-global-color-a6f9306: #9947AA;
+    --e-global-color-b8fff29: #02010100;
+    --e-global-color-51e9ff2: #013965;
+}
+
+[data-theme="light"] {
+    --background: #ffffff;
+    --accent-color1: #000000;
+    --accent-color2: #eeeeee;
+    --accent-color3: #777777;
+    --card-color: #eeeeee;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.app-container {
+    background-color: var(--background);
+    font-family: var(--font-family);
+    overflow-x: hidden;
+    transition: 0.5s ease-in-out;
+    padding: 2rem 4rem;
+
+    @media screen and (min-width:280px) and (max-width:10px) {
+        padding: 0;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+    }
+
+}
+
+::-webkit-scrollbar {
+    background-color: #111111;
+    width: 0.2rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--orange)
+}
