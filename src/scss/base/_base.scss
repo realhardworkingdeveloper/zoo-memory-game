@@ -10,7 +10,7 @@
     --accent-color1: #ffffff;
     --accent-color2: #555555;
     --accent-color3: #cccccc;
-    --card-color: #000000;
+    --card-color: #012A4A;
     --background: #001233;
     --font-family: "Inter", sans-serif;
     --e-global-color-primary: #001233;
@@ -67,5 +67,5 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--orange)
+    background-color: var(--e-global-color-993e647)
 }

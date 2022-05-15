@@ -26,17 +26,17 @@ export default function Free() {
                 <div className="card1">
                     <Card
                         image={elephant}
-                        series="Gloop Series"
-                        title="Purple Man"
+                        series="Uncommon"
+                        title="Purple Phant"
                         price={2.99}
-                        tag={12983}
+                        tag={"zoo.near"}
                         time={1}
                     />
                 </div>
                 <div className="card2">
                     <Card
                         image={croc}
-                        series="Gloop Series"
+                        series="Uncommon"
                         title="Purple Man"
                         price={3.95}
                         tag="1094"

@@ -10,43 +10,47 @@ export default function SuperRare() {
         {
             image: koalaRare,
             series: "Rare",
-            title: "Purple Man",
+            title: "Yogi-Bear",
             price: 2.99,
-            tag: 12983,
+            tag: "zoo.near",
             time: 4,
+            buyVisible: true
         },
         {
             image: chickenRare,
             series: "Epic",
-            title: "Beige",
+            title: "Firefly Beige",
             price: 2.99,
-            tag: 12983,
+            tag: "zoo.near",
             time: 5,
+            buyVisible: true
         },
         {
             image: deerRare,
             series: "Mythical",
-            title: "Red Man",
+            title: "Deer Woody",
             price: 2.99,
-            tag: 12983,
+            tag: "zoo.near",
             time: 12,
+            buyVisible: true
         },
         {
             image: foxRare,
             series: "Rare",
-            title: "Green",
+            title: "Sly Foxie",
             price: 2.99,
-            tag: 12983,
+            tag: "zoo.near",
             time: 9,
+            buyVisible: true
         },
     ];
 
     return (
         <div className="super-rare">
             <div className="title-container">
-                <h2 className="title">LE Super Rare Auction</h2>
+                <h2 className="title">ZooMemory Rare Auction</h2>
                 <p className="description">
-                    We have released four limited edition NFT's early which which can be
+                    We have released four limited edition NFT's early which can be
                     bid on via <a href="#">Paras</a>.
                 </p>
             </div>

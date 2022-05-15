@@ -12,7 +12,7 @@ export default function Home() {
                         Don't miss out on the release of our new NFT. Sign up below to
                         recieve updates when we go live.
                     </p>
-                    <button>Sign Up</button>
+                    <button>Play Game</button>
                 </div>
                 <div className="image-container">
                     <div className="image">
