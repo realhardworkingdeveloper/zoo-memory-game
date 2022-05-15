@@ -1,7 +1,7 @@
 import React from 'react'
 import neartoken1 from '../assets/neartoken1.png'
 
-export default function Card({ image, series, title, price, tag, time }) {
+export default function Card({ image, series, title, price, tag, time, buyVisible }) {
     return (
         <div className="card">
             <div className="card-image">
@@ -23,6 +23,7 @@ export default function Card({ image, series, title, price, tag, time }) {
                     <span>#{tag}</span>
                     <span>{time} sold</span>
                 </div>
+                <button className={`${buyVisible ? "" : "buy-visible"}`}>Buy Now</button>
             </div>
         </div>
     );

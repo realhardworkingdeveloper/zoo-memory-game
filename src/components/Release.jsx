@@ -32,7 +32,7 @@ export default function Release() {
                 <div className="card-container">
                     <Card
                         image={catRelease}
-                        series="Gloop Series"
+                        series="RARE"
                         title="Purple Man"
                         price={3.95}
                         tag="1094"

@@ -51,7 +51,7 @@ export default function SuperRare() {
                 </p>
             </div>
             <div className="cards">
-                {data.map(({ image, series, title, price, tag, time }, index) => (
+                {data.map(({ image, series, title, price, tag, time, buyVisible }, index) => (
                     <Card
                         image={image}
                         series={series}
@@ -59,6 +59,7 @@ export default function SuperRare() {
                         price={price}
                         tag={tag}
                         time={time}
+                        buyVisible={buyVisible}
                         key={index}
                     />
                 ))}
