@@ -32,16 +32,19 @@ export default function Navbar({ changeTheme, currentTheme }) {
             <div className={`links-container ${navState ? "nav-visible" : ""}`}>
                 <ul className="links">
                     <li>
-                        <a href="#features">Features</a>
+                        <a href="#features">Play Game</a>
                     </li>
                     <li>
-                        <a href="#about">About</a>
+                        <a href="#about">Marketplace</a>
                     </li>
                     <li>
-                        <a href="#launch">Launch</a>
+                        <a href="#launch">How to Play</a>
                     </li>
                     <li>
                         <a href="#signup">Sign Up</a>
+                    </li>
+                    <li>
+                        <a href="#wallet" className="wallet">Connect Near</a>
                     </li>
                     <li onClick={changeTheme}>
                         {currentTheme === "dark" ? (
