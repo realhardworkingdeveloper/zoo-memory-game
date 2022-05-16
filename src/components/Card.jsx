@@ -1,5 +1,4 @@
 import React from 'react'
-import neartoken1 from '../assets/neartoken1.png'
 import zootoken from '../assets/zootoken.png'
 
 
@@ -18,7 +17,7 @@ export default function Card({ image, series, title, price, tag, time, buyVisibl
                     <h4 className="card-title">{title}</h4>
                     <div className="card-price">
                         <img src={zootoken} alt="super eth" />
-                        <h4>{price} ZOC</h4>
+                        <h4>{price} ZCM</h4>
                     </div>
                 </div>
                 <div className="card-sub-details">
