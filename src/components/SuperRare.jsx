@@ -15,10 +15,6 @@ export default function SuperRare() {
             tag: "zoo.near",
             time: 4,
             buyVisible: false,
-<<<<<<< HEAD
-            buttonText: "STAKE",
-=======
->>>>>>> 52de3f91e721058dcd9ee9e8329a676b535a8b93
             bidText: "Top Bid"
         },
         {
@@ -29,10 +25,6 @@ export default function SuperRare() {
             tag: "zoo.near",
             time: 5,
             buyVisible: false,
-<<<<<<< HEAD
-            buttonText: "STAKING...",
-=======
->>>>>>> 52de3f91e721058dcd9ee9e8329a676b535a8b93
             bidText: "Top Bid"
         },
         {
