@@ -6,11 +6,12 @@ export default function Home() {
         <div className="home">
             <div className="container">
                 <div className="content">
-                    <p className="sub-title">Launching Soon</p>
+                    <p className="sub-title">Zoomemory collection</p>
                     <h1 className="title">An NFT like no other</h1>
                     <p className="description">
-                        Don't miss out on the release of our new NFT. Sign up below to
-                        recieve updates when we go live.
+                    Boost up your memory and help zoos in Ukrine, by playing our game.
+                    And buying your NFT.
+
                     </p>
                     <button>Play Game</button>
                 </div>

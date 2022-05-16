@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../assets/logo.png";
-import { BsFacebook, BsTwitter, BsInstagram } from "react-icons/bs";
-import { FaTiktok } from "react-icons/fa";
+import {  BsTwitter, BsInstagram } from "react-icons/bs";
+import { FaTelegramPlane, FaDiscord } from "react-icons/fa";
 export default function Footer() {
     const links = [
         {
@@ -10,7 +10,7 @@ export default function Footer() {
         },
         {
             title: "NFT",
-            data: ["OpenSea", "Maker", "Learn"],
+            data: ["Marketplace", "NEAR", "Paras"],
         },
         {
             title: "Contact",
@@ -22,10 +22,11 @@ export default function Footer() {
         },
     ];
     const socialLink = [
-        <BsFacebook />,
+        <FaTelegramPlane />,
+        <FaDiscord />,
         <BsTwitter />,
         <BsInstagram />,
-        <FaTiktok />,
+
     ];
     return (
         <footer>
@@ -57,8 +58,8 @@ export default function Footer() {
                 </div>
             </div>
             <div className="lower">
-                <span>&copy; Copyright 2022 NFT</span>
-                <span>Launching August 2022</span>
+                <span>&copy; Copyright 2022 ZooKeepers</span>
+                <span>NEAR UA Hackathon 2022</span>
             </div>
         </footer>
     );

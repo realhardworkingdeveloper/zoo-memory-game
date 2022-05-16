@@ -52,10 +52,10 @@ export default function SuperRare() {
     return (
         <div className="super-rare">
             <div className="title-container">
-                <h2 className="title">ZooMemory Rare Auction</h2>
+                <h2 className="title">ZooMemory Marketplace</h2>
                 <p className="description">
                     We have released four limited edition NFT's early which can be
-                    bid on via <a href="#">Paras</a>.
+                    bought in our <a href="#">Marketplace</a>.
                 </p>
             </div>
             <div className="cards">
