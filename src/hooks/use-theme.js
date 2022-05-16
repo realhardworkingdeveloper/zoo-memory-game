@@ -8,3 +8,5 @@ export const useTheme = () => {
 
   return [theme, changeTheme];
 };
+
+export default useTheme;
