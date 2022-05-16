@@ -49,16 +49,27 @@
             z-index: 1;
             display: flex;
             justify-content: center;
-            align-items: flex-end;
+            align-items: center;
+            gap: 5rem;
+
+
+            .crystal {
+                height: 14rem;
+
+            }
 
             img {
                 height: 28rem;
+
+                .crystal {
+                    height: 14rem;
+                }
             }
 
             .ellipse {
                 z-index: -1;
                 position: absolute;
-                bottom: -40%;
+                bottom: 10%;
                 right: 0;
                 height: 20rem;
                 width: 20rem;

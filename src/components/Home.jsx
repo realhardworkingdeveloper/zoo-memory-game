@@ -9,8 +9,8 @@ export default function Home() {
                     <p className="sub-title">Zoomemory collection</p>
                     <h1 className="title">An NFT like no other</h1>
                     <p className="description">
-                    Boost up your memory and help zoos in Ukrine, by playing our game.
-                    And buying your NFT.
+                        Boost up your memory and help zoos in Ukrine, by playing our game.
+                        Also check out our Marketplace for cool NFTs.
 
                     </p>
                     <button>Play Game</button>

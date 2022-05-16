@@ -1,6 +1,7 @@
 import React from 'react'
 import { BsArrowRight } from 'react-icons/bs'
-import giraffe1 from '../assets/giraffe1.png'
+import giraffe1 from '../assets/giraffe.png'
+import crystal from '../assets/crystal.png'
 import catRelease from '../assets/catRelease.png'
 import Card from './Card'
 
@@ -24,6 +25,7 @@ export default function Release() {
                 </div>
                 <div className="image">
                     <img src={giraffe1} alt="release" />
+                    <img src={crystal} alt="release" className='crystal' />
                     <div className="ellipse pink"></div>
                 </div>
             </div>
