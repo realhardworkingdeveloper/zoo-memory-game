@@ -15,7 +15,10 @@ export default function SuperRare() {
             tag: "zoo.near",
             time: 4,
             buyVisible: false,
+<<<<<<< HEAD
             buttonText: "STAKE",
+=======
+>>>>>>> 52de3f91e721058dcd9ee9e8329a676b535a8b93
             bidText: "Top Bid"
         },
         {
@@ -26,7 +29,10 @@ export default function SuperRare() {
             tag: "zoo.near",
             time: 5,
             buyVisible: false,
+<<<<<<< HEAD
             buttonText: "STAKING...",
+=======
+>>>>>>> 52de3f91e721058dcd9ee9e8329a676b535a8b93
             bidText: "Top Bid"
         },
         {
@@ -54,10 +60,10 @@ export default function SuperRare() {
     return (
         <div className="super-rare">
             <div className="title-container">
-                <h2 className="title">ZooMemory Rare Auction</h2>
+                <h2 className="title">ZooMemory Marketplace</h2>
                 <p className="description">
                     We have released four limited edition NFT's early which can be
-                    bid on via <a href="#">Paras</a>.
+                    bought in our <a href="#">Marketplace</a>.
                 </p>
             </div>
             <div className="cards">

@@ -37,7 +37,13 @@ nav {
                 a {
                     color: var(--accent-color3);
                     text-decoration: none;
+
                 }
+                .wallet {
+                  color: var(--pink);
+                  font-weight: bold;
+                }
+
 
                 &:last-of-type {
                     a {

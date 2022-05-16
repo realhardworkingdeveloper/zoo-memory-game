@@ -9,18 +9,17 @@ export default function Release() {
         <div className="releases">
             <div className="release orange">
                 <div className="content">
-                    <h2 className="title">Initial Release 4/11</h2>
+                    <h2 className="title">How to Play?</h2>
                     <p className="description">
-                        We have released four limited edition NFTs early which can be bid on
-                        via <a href="#">Paras</a>
+                    In game you have to flip similar cards. To pass level you need to flip all cards.
+                  {/*<a href="#">Paras</a>*/}
                     </p>
                     <p className="description">
-                        There will be the only four of these NFTs we ever make, so be sure
-                        not to miss out!
+                        Every time you pass the level you will get certain amount of crystals.
                     </p>
-                    <p className="description">50% of proceeds go to charity.</p>
+                    <p className="description">By owning crystals, you get ZooCoins <a href="#">$ZOC</a></p>
                     <a href="#" className="link">
-                        Check them out <BsArrowRight />
+                        More Info <BsArrowRight />
                     </a>
                 </div>
                 <div className="image">
@@ -41,18 +40,18 @@ export default function Release() {
                     <div className="ellipse orange"></div>
                 </div>
                 <div className="content">
-                    <h2 className="title">Initial Release 4/11</h2>
+                    <h2 className="title">Zoos in Ukraine</h2>
                     <p className="description">
-                        We have released four limited edition NFTs early which can be bid on
-                        via <a href="#">Paras</a>
+                    Once you have $ZOC coins, you can spend them and buy NFT character in our&nbsp;
+                         <a href="#">Marketplace</a>
                     </p>
                     <p className="description">
-                        There will be the only four of these NFTs we ever make, so be sure
-                        not to miss out!
+                    The money collected from sales will go directly to support zoos in Ukraine.
+
                     </p>
-                    <p className="description">50% of proceeds go to charity.</p>
+                    <p className="description">50% of royalties will go to zoos.</p>
                     <a href="#" className="link">
-                        Check them out <BsArrowRight />
+                        Help Zoos <BsArrowRight />
                     </a>
                 </div>
             </div>
