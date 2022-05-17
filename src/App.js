@@ -17,6 +17,7 @@ import "./scss/index.scss";
 
 // NEAR utils
 import { accountBalance, initializeContract } from "./utils/near";
+import GamePage from "./pages/game-page/game-page";
 
 export const App = () => {
   const [theme, changeTheme] = useTheme();
@@ -35,8 +36,6 @@ export const App = () => {
     (async () => {
       try {
         await initializeContract();
-
-        console.log("initialized contract");
 
         const acc = window.walletConnection.account();
         setAccount(acc);
@@ -79,7 +78,7 @@ export const App = () => {
       <Navbar changeTheme={changeTheme} currentTheme={theme} />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/game" element={<></>} />
+        <Route path="/game" element={<GamePage />} />
         <Route path="/marketplace" element={<></>} />
       </Routes>
     </div>

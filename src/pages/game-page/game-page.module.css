@@ -1,0 +1,94 @@
+.gameBody {
+  font-family: CHAWP;
+  margin: 0;
+  font-size: 1.5rem;
+  text-align: center;
+  width: 100%;
+  /* min-width: 920px; */
+  padding-top: 64.65%;
+  max-height: 100%;
+  position: relative;
+  background: url("../../assets/img/game_bg.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  color: #fff;
+}
+
+@media screen and (max-width: 900px) {
+  .gameBody {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .gameBody {
+    font-size: 0.8rem;
+  }
+}
+
+.game {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  /* max-width: 860px; */
+  margin: 2rem auto;
+  padding: 0 5rem;
+}
+
+.game p {
+  margin-top: 0.75em;
+}
+
+.game button {
+  /* position: absolute;
+  bottom: 2%;
+  left: 3.5%; */
+  margin-top: 0.75em;
+  background: none;
+  border: 2px solid #fff;
+  padding: 0.375rem 0.75rem;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.game h2 {
+  margin-top: 0.5em;
+}
+
+@media screen and (max-width: 1280px) {
+  .game h2 {
+    margin-top: 0.25em;
+  }
+  .game p,
+  .game button {
+    margin-top: 0.25em;
+  }
+}
+
+.game button:hover {
+  background: #c23866;
+  color: #fff;
+}
+
+.cardGrid {
+  margin-top: 40px;
+  display: grid;
+  margin: auto;
+  width: 55%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  /* grid-gap: 20px; */
+  gap: 1.25rem;
+}
+
+.cardGrid.row5 {
+  width: 65%;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 1rem;
+}

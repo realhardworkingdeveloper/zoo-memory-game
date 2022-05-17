@@ -1,0 +1,27 @@
+.info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.info a {
+  text-decoration: none;
+  color: #fff;
+}
+.info a:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+.numWins {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.2em;
+}
+
+.win {
+  border: 2px solid #fff;
+  padding: 8px;
+  border-radius: 50%;
+}

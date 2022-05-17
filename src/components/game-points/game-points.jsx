@@ -1,14 +1,10 @@
 import { useLocation } from "react-router-dom";
 import useAccount from "../../store/account.store";
 import { convertToHours } from "../../utils/date-time";
-import classes from "./points-counter.module.css";
+import classes from "./game-points.module.css";
 
-const PointsCounter = ({ page = "home" }) => {
+const GamePointsCounter = ({ page = "home" }) => {
   const { totalPoints, timeRemaining, isWalletConnected } = useAccount();
-
-  const { pathname } = useLocation();
-
-  if (!isWalletConnected || pathname.includes("/game")) return null;
 
   return (
     <div
@@ -30,4 +26,4 @@ const PointsCounter = ({ page = "home" }) => {
   );
 };
 
-export default PointsCounter;
+export default GamePointsCounter;
