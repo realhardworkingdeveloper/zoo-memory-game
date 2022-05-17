@@ -7,4 +7,42 @@
     flex-wrap: wrap;
     gap: 1rem;
   }
+
+  &__selling {
+    
+    &__content {
+      display: flex;
+      flex-direction: row;
+      justify-content: space;
+
+      .card-container, .form-container {
+        width: 50%;
+      }
+
+      .card-container {
+        margin: 0 auto;
+      }
+
+      .form-container {
+        form {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+
+          input, textarea {
+            background: none;
+            outline: none;
+            border: 3px solid --accent-color3;
+            font-family: inherit;
+            font-size: 1rem;
+            padding: 0.5rem;
+            border-radius: 1rem;
+          
+            resize: none;
+          }
+        }
+      }
+    }
+
+  }
 }

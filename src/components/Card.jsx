@@ -24,7 +24,6 @@ export default function Card({
           <span className="card-series">{series}</span>
           <span className="card-top">{bidText}</span>
         </div>
-
         <div className="card-details">
           <h4 className="card-title" onClick={onClick}>
             {title}
@@ -34,20 +33,17 @@ export default function Card({
             <h4>{price} ZCM</h4>
           </div>
         </div>
-
         <div className="card-sub-details">
           <span>@{tag}</span>
-          <span>{time} sold</span>
+          <span>{time || 0} sold</span>
         </div>
 
-        {buttonText && (
-          <button
-            className={`${buyVisible ? "" : "buy-visible"}`}
-            onClick={onClickBtn}
-          >
-            {buttonText}
-          </button>
-        )}
+        <button
+          className={`${buyVisible ? "" : "buy-visible"}`}
+          onClick={onClickBtn}
+        >
+          {buttonText}
+        </button>
       </div>
     </div>
   );

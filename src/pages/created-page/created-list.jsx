@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Card from "../../components/Card";
 
-const CreatedList = ({ setSellingPage, setSellingId }) => {
+const CreatedList = ({ setSellingPage, setSellingNft }) => {
   const [loading, setLoading] = useState(true);
   const [list, setList] = useState([]);
 
@@ -23,13 +23,15 @@ const CreatedList = ({ setSellingPage, setSellingId }) => {
     <div className="created__list">
       {list.map((nft) => (
         <Card
+          key={nft.id}
           id={nft.id}
           image={nft.ipfsUrl}
           title={nft.name}
           tag={nft.minterId}
           buttonText="SELL"
+          buyVisible
           onClickBtn={() => {
-            setSellingId(nft.id);
+            setSellingNft(nft);
             setSellingPage(true);
           }}
         />
