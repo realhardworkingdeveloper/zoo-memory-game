@@ -64,8 +64,6 @@ const Selling = ({
     },
   });
 
-  console.log(formik.errors);
-
   return (
     <div className="created__selling">
       <div className="created__selling__content">

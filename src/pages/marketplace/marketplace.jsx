@@ -1,4 +1,4 @@
-import { NavLink, Route, Routes } from "react-router-dom";
+import { Navigate, NavLink, Route, Routes } from "react-router-dom";
 import CreatePage from "../created-page/created-page";
 import MintPage from "../mint-page/mint-page";
 
@@ -41,6 +41,7 @@ const Marketplace = () => {
           <Route path="swap" element={ComingSoon} />
           <Route path="mint" element={<MintPage />} />
           <Route path="created" element={<CreatePage />} />
+          <Route path="*" element={<Navigate to="buy" />} />
         </Routes>
       </div>
     </div>
