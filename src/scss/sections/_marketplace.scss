@@ -1,0 +1,39 @@
+.marketplace {
+  min-height: 100vh;
+  color: #000;
+
+  &__nav {
+    margin: 5rem auto ;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+
+    a {
+      font-size: 1.5rem;
+      text-decoration: none;
+
+      &.active {
+        color: #FF3998;
+      }
+    }
+    
+  }
+}
+
+[data-theme="dark"] {
+  .marketplace {
+    color: #fff;
+
+    a {
+      color: #fff;
+      font-size: 1.5rem;
+        text-decoration: none;
+      
+        &.active {
+          color: #FF3998;
+        }
+    }
+  }
+}
