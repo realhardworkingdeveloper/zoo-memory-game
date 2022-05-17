@@ -32,7 +32,7 @@ const MintPage = () => {
 
   return (
     <div className="mint">
-      <form className="mint__form" onSubmit={form.submitForm}>
+      <form className="mint__form" onSubmit={form.handleSubmit}>
         <input
           type="text"
           name="name"
