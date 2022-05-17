@@ -198,7 +198,7 @@ const GamePage = () => {
       setNumberOfWins(0);
     }
 
-    if (remainingTime >= 0 && !userHasWon) setRemainingTime(remainingTime - 1);
+    if (remainingTime > 0 && !userHasWon) setRemainingTime(remainingTime - 1);
   }, 1000); // delay in ms, 1s => 1000ms
 
   // handle a choice
