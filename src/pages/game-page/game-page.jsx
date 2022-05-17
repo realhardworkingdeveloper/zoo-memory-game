@@ -181,6 +181,9 @@ const GamePage = () => {
       }
 
       if (tempPoints === 0) setRemainingPointsTime(24 * 60 * 60); // TODO: store current time as start time for points expiry
+      // TODO: store timestamp here for user passing a level
+      localStorage.setItem("lastWonTimestamp", JSON.stringify(Date.now()));
+      setLastWonTimestamp(Date.now());
 
       localStorage.setItem(
         accountId,
@@ -206,7 +209,7 @@ const GamePage = () => {
       setNumberOfWins(0);
     }
 
-    setRemainingTime(remainingTime - 1);
+    if (remainingTime > 0 && !userHasWon) setRemainingTime(remainingTime - 1);
   }, 1000); // delay in ms, 1s => 1000ms
 
   // handle a choice
@@ -238,7 +241,6 @@ const GamePage = () => {
 
     setChoiceOne(null);
     setChoiceTwo(null);
-    setRemainingTime(getTimeForLevel(curLevel));
     setTurns(0);
     setUserHasWon(false);
     setDisabled(false);
