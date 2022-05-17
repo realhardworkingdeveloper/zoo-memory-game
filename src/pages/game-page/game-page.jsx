@@ -17,6 +17,7 @@ import useInterval from "../../hooks/use-interval";
 // import Logout from "../logout/logout";
 import GameWins from "../../components/game-wins/game-wins";
 import GamePointsCounter from "../../components/game-points/game-points";
+import { getWorldTime } from "../../utils/date-time";
 
 const GamePage = () => {
   const TOTAL_LEVELS = 10;
@@ -77,13 +78,23 @@ const GamePage = () => {
   useEffect(() => {
     (async () => {
       // TODO: perform async actions with smart contracts to get the level, number of times won, etc, will get them from localStorage for now
-      const curData = localStorage.getItem(accountId)
-        ? JSON.parse(localStorage.getItem(accountId))
-        : null;
+      const curData = await window.contract.get_status({
+        account_id: accountId
+      });
+      console.log("curData", curData)
+
+      const lastWonTimestamp = curData.issued_at;
+      setLastWonTimestamp(lastWonTimestamp);
+
+      const currentTime = await getWorldTime();
+
+      // const curData = localStorage.getItem(accountId)
+      //   ? JSON.parse(localStorage.getItem(accountId))
+      //   : null;
 
       // check if 24 hours have passed since user last won
       const has24HoursPassedSincelastWin =
-        Date.now() - lastWonTimestamp >= 24 * 60 * 60 * 1000;
+        currentTime - lastWonTimestamp >= 24 * 60 * 60;
 
       // check whether to reset level or not based on when user last played/won
       const levelToSet = has24HoursPassedSincelastWin ? 0 : curData?.level || 0;
@@ -254,9 +265,8 @@ const GamePage = () => {
         <GamePointsCounter />
 
         <div
-          className={`${classes.cardGrid} ${
-            curLevel >= CUTOFF_LEVEL ? classes.row5 : ""
-          }`}
+          className={`${classes.cardGrid} ${curLevel >= CUTOFF_LEVEL ? classes.row5 : ""
+            }`}
         >
           {cards.map((card) => {
             const isCardFlipped =
