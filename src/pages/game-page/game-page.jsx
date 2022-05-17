@@ -190,7 +190,7 @@ const GamePage = () => {
 
   const replayHandler = () => {
     if (userHasWon && numberOfWins >= 3) {
-      // perform actions here to update points for user
+      // TODO: perform actions here to update points for user
 
       const newLevel = curLevel + 1;
       setCurLevel(newLevel);
