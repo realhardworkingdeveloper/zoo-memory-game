@@ -1,0 +1,10 @@
+.created {
+  color: --accent-color-1;
+
+  &__list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}

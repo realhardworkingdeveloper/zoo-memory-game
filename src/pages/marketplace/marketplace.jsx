@@ -1,4 +1,5 @@
 import { NavLink, Route, Routes } from "react-router-dom";
+import CreatePage from "../created-page/created-page";
 import MintPage from "../mint-page/mint-page";
 
 const Marketplace = () => {
@@ -39,7 +40,7 @@ const Marketplace = () => {
           <Route path="stake" element={ComingSoon} />
           <Route path="swap" element={ComingSoon} />
           <Route path="mint" element={<MintPage />} />
-          <Route path="created" element={ComingSoon} />
+          <Route path="created" element={<CreatePage />} />
         </Routes>
       </div>
     </div>
