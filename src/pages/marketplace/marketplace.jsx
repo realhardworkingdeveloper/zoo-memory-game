@@ -1,4 +1,5 @@
 import { NavLink, Route, Routes } from "react-router-dom";
+import MintPage from "../mint-page/mint-page";
 
 const Marketplace = () => {
   const ComingSoon = <h1 style={{ textAlign: "center" }}>Coming soon</h1>;
@@ -7,46 +8,25 @@ const Marketplace = () => {
   return (
     <div className="marketplace">
       <div className="marketplace__nav">
-        <NavLink
-          className={({ isActive }) => (isActive ? "active" : "")}
-          to="buy"
-        >
+        <NavLink className={cls} to="buy">
           BUY
         </NavLink>
-        <NavLink
-          className={({ isActive }) => (isActive ? "active" : "")}
-          to="sell"
-        >
+        <NavLink className={cls} to="sell">
           SELL
         </NavLink>
-        <NavLink
-          className={({ isActive }) => (isActive ? "active" : "")}
-          to="collection"
-        >
+        <NavLink className={cls} to="collection">
           COLLECTION
         </NavLink>
-        <NavLink
-          className={({ isActive }) => (isActive ? "active" : "")}
-          to="stake"
-        >
+        <NavLink className={cls} to="stake">
           STAKE
         </NavLink>
-        <NavLink
-          className={({ isActive }) => (isActive ? "active" : "")}
-          to="swap"
-        >
+        <NavLink className={cls} to="swap">
           SWAP
         </NavLink>
-        <NavLink
-          className={({ isActive }) => (isActive ? "active" : "")}
-          to="mint"
-        >
+        <NavLink className={cls} to="mint">
           MINT
         </NavLink>
-        <NavLink
-          className={({ isActive }) => (isActive ? "active" : "")}
-          to="created"
-        >
+        <NavLink className={cls} to="created">
           CREATED
         </NavLink>
       </div>
@@ -58,7 +38,7 @@ const Marketplace = () => {
           <Route path="collection" element={ComingSoon} />
           <Route path="stake" element={ComingSoon} />
           <Route path="swap" element={ComingSoon} />
-          <Route path="mint" element={ComingSoon} />
+          <Route path="mint" element={<MintPage />} />
           <Route path="created" element={ComingSoon} />
         </Routes>
       </div>
