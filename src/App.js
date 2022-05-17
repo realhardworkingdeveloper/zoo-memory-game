@@ -1,60 +1,97 @@
-import React, { useState, useEffect } from 'react'
-import scrollreveal from 'scrollreveal'
-import Clients from './components/Clients'
-import Footer from './components/Footer'
-import Free from './components/Free'
-import Home from './components/Home'
-import Like from './components/Like'
-import Navbar from './components/Navbar'
-import Release from './components/Release'
-import ScrollToTop from './components/ScrollToTop'
-import SignUp from './components/SignUp'
-import SuperRare from './components/SuperRare'
-import './scss/index.scss'
+import React, { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
 
+// components and pages
+import Navbar from "./components/Navbar";
+import HomePage from "./pages/home-page/home-page";
 
-export default function App() {
+// hooks
+import { useTheme } from "./hooks/use-theme";
+import { useInterval } from "./hooks/use-interval";
 
-  const [theme, setTheme] = useState("dark");
-  const changeTheme = () => {
-    theme === "dark" ? setTheme("light") : setTheme("dark")
-  }
+// global state
+import useAccount from "./store/account.store";
+
+// styles
+import "./scss/index.scss";
+
+// NEAR utils
+import { accountBalance, initializeContract } from "./utils/near";
+import GamePage from "./pages/game-page/game-page";
+
+export const App = () => {
+  const [theme, changeTheme] = useTheme();
+
+  const {
+    setAccount,
+    setBalance,
+    setPoints,
+    setTempPoints,
+    setPermPoints,
+    setCoins,
+    timeRemaining,
+    setTimeRemaining,
+    accountLoading,
+    setAccountLoading,
+  } = useAccount();
 
   useEffect(() => {
-    const registerAnimations = () => {
-      const sr = scrollreveal({
-        origin: "bottom",
-        distance: "80px",
-        duration: 2000,
-        reset: false
-      });
-      sr.reveal(`
-      nav, .home, .free, .clients, .super-rare, .releases, .like, .signup, footer
-      `, { interval: 500 }
-      );
-    };
-    registerAnimations()
-  }, []);
+    (async () => {
+      try {
+        await initializeContract();
 
-  window.setTimeout(() => {
-    const home = document.getElementsByClassName("home");
-    home[0].style.transform = "none";
-    const nav = document.getElementsByTagName("nav");
-    nav[0].style.transform = "none";
-  }, 1500)
+        const acc = window.walletConnection.account();
+        setAccount(acc);
+
+        if (acc && acc.accountId) {
+          const bal = await accountBalance();
+          setBalance(bal);
+
+          // TODO: Integrate with smart contract to get points owned by user, and remaining time for the points expiry, as well as coins owned by user
+          const accountDetails = JSON.parse(
+            localStorage.getItem(acc.accountId)
+          );
+          const tempPoints = accountDetails?.tempPoints || 0;
+          const permPoints = accountDetails?.permPoints || 0;
+          const totalPoints = tempPoints + permPoints;
+          const coins = 5;
+          // TODO: adding arbitrary time here, not storing for now, replace with API call values
+          const timeRemaining = totalPoints > 0 ? 16 * 60 * 60 : 0;
+
+          setPoints(totalPoints);
+          setTempPoints(tempPoints);
+          setPermPoints(permPoints);
+          setCoins(coins);
+          setTimeRemaining(timeRemaining);
+        }
+
+        setAccountLoading(false);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, []); /* eslint-disable-line */ /* fucking BS eslint error */
+
+  useInterval(() => {
+    if (accountLoading) {
+      return;
+    }
+
+    setTimeRemaining(timeRemaining - 1);
+  }, 1000);
+
+  if (accountLoading) return;
 
   return (
-    <div className='app-container' data-theme={theme}>
-      <ScrollToTop />
+    <div className="app-container" data-theme={theme}>
       <Navbar changeTheme={changeTheme} currentTheme={theme} />
-      <Home />
-      <Free />
-      <Clients />
-      <SuperRare />
-      <Release />
-      <Like />
-      <SignUp />
-      <Footer />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/game" element={<GamePage />} />
+        <Route path="/marketplace" element={<></>} />
+      </Routes>
     </div>
-  )
-}
+  );
+};
+
+export default App;
