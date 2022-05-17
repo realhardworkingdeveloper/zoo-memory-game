@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { v4 } from "uuid";
+import Button from "../../components/button/button";
 import useAccount from "../../store/account.store";
 
 const MintPage = () => {
@@ -58,9 +59,9 @@ const MintPage = () => {
           onChange={form.handleChange}
         />
         <div className="btn-container">
-          <button type="submit" disabled={form.isSubmitting}>
+          <Button type="submit" disabled={form.isSubmitting}>
             MINT
-          </button>
+          </Button>
         </div>
       </form>
     </div>
