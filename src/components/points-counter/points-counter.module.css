@@ -1,0 +1,25 @@
+.pointsCounter {
+  position: absolute;
+
+  bottom: -50px;
+  right: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.points {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.imgContainer {
+  width: 1.5rem;
+  height: 2rem;
+  position: relative;
+  margin-right: 0.5rem;
+}

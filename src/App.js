@@ -36,6 +36,8 @@ export const App = () => {
       try {
         await initializeContract();
 
+        console.log("initialized contract");
+
         const acc = window.walletConnection.account();
         setAccount(acc);
 

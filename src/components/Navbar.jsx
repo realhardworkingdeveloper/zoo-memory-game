@@ -3,9 +3,29 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { MdClose } from "react-icons/md";
 import { ImSun } from "react-icons/im";
 import { BsFillMoonFill } from "react-icons/bs";
+import { login, logout } from "../utils/near";
 import logo from "../assets/logo.png";
+import useAccount from "../store/account.store";
+import { Link } from "react-router-dom";
+import PointsCounter from "./points-counter/points-counter";
+
 export default function Navbar({ changeTheme, currentTheme }) {
   const [navState, setNavState] = useState(false);
+
+  const { isWalletConnected, accountId } = useAccount();
+
+  const loginLogout = () => {
+    if (isWalletConnected) logout();
+    else login();
+  };
+
+  const checkAuthBeforeHref = () => {
+    if (!isWalletConnected) {
+      login();
+      return false;
+    }
+  };
+
   return (
     <nav>
       <div className="brand-container">
@@ -32,10 +52,20 @@ export default function Navbar({ changeTheme, currentTheme }) {
       <div className={`links-container ${navState ? "nav-visible" : ""}`}>
         <ul className="links">
           <li>
-            <a href="#features">Play Game</a>
+            <Link
+              to={!isWalletConnected ? "#" : "/game"}
+              onClick={checkAuthBeforeHref}
+            >
+              Play Game
+            </Link>
           </li>
           <li>
-            <a href="#about">Marketplace</a>
+            <Link
+              to={!isWalletConnected ? "" : "/marketplace"}
+              onClick={checkAuthBeforeHref}
+            >
+              Marketplace
+            </Link>
           </li>
           <li>
             <a href="#launch">How to Play</a>
@@ -44,9 +74,20 @@ export default function Navbar({ changeTheme, currentTheme }) {
             <a href="#newsletter">Newsletter</a>
           </li>
           <li>
-            <a href="#wallet" className="wallet">
-              Connect Near
-            </a>
+            <button onClick={loginLogout} className="wallet">
+              {isWalletConnected ? (
+                <span>
+                  <span>{accountId} </span>
+                  <span
+                    style={{ color: currentTheme === "dark" ? "#fff" : "#000" }}
+                  >
+                    {"(>"}
+                  </span>
+                </span>
+              ) : (
+                "Connect Near"
+              )}
+            </button>
           </li>
           <li onClick={changeTheme} style={{ cursor: "pointer" }}>
             {currentTheme === "dark" ? (
@@ -57,6 +98,8 @@ export default function Navbar({ changeTheme, currentTheme }) {
           </li>
         </ul>
       </div>
+
+      <PointsCounter />
     </nav>
   );
 }
