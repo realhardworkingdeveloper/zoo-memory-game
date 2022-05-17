@@ -1,10 +1,8 @@
-import { useLocation } from "react-router-dom";
 import useAccount from "../../store/account.store";
-import { convertToHours } from "../../utils/date-time";
 import classes from "./game-points.module.css";
 
 const GamePointsCounter = ({ page = "home" }) => {
-  const { totalPoints, timeRemaining, isWalletConnected } = useAccount();
+  const { totalPoints, permanentPoints } = useAccount();
 
   return (
     <div
@@ -19,9 +17,14 @@ const GamePointsCounter = ({ page = "home" }) => {
         </div>
       </div>
 
-      {totalPoints > 0 && timeRemaining > 0 && page !== "game" && (
-        <div>{convertToHours(timeRemaining)}</div>
-      )}
+      <div className={classes.points}>
+        <div className={classes.imgContainer}>
+          <img src="/img/point-diamond.png" alt="points" />
+        </div>
+        <div>
+          <span>{permanentPoints}</span>
+        </div>
+      </div>
     </div>
   );
 };

@@ -6,7 +6,9 @@ export const useAccount = create((set) => ({
   isWalletConnected: false,
   balance: "0",
   balanceNumber: 0,
-  totalPoints: 0,
+  totalPoints: 0, // game points
+  permanentPoints: 0, // permanent points from staking
+  coins: 0,
   timeRemaining: 0,
   accountLoading: true,
 
@@ -15,7 +17,6 @@ export const useAccount = create((set) => ({
       account,
       accountId: account.accountId,
       isWalletConnected: Boolean(account.accountId),
-      // accountLoading: false,
     });
   },
   setBalance(balance) {
@@ -23,6 +24,12 @@ export const useAccount = create((set) => ({
   },
   setPoints(totalPoints) {
     set({ totalPoints });
+  },
+  setPermanentPoints(permanentPoints) {
+    set({ permanentPoints });
+  },
+  setCoins(coins) {
+    set({ coins });
   },
   setTimeRemaining(timeRemaining) {
     set({ timeRemaining });
