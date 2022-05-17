@@ -197,7 +197,9 @@ const GamePage = () => {
       setNumberOfWins(0);
       setRemainingTime(getTimeForLevel(newLevel));
       shuffleCards(newLevel);
-      // setTotalPoints((curPts) => curPts + getPointsForLevel(newLevel));
+    } else {
+      setRemainingTime(getTimeForLevel(curLevel));
+      shuffleCards(curLevel);
     }
 
     setChoiceOne(null);
