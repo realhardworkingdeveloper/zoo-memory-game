@@ -24,7 +24,8 @@ const GamePage = () => {
 
   const {
     totalPoints,
-    setPoints,
+    tempPoints,
+    addTempPoints,
     setTimeRemaining: setRemainingPointsTime,
   } = useAccount();
 
@@ -41,7 +42,9 @@ const GamePage = () => {
   const [curLevel, setCurLevel] = useState(0);
   const [numberOfWins, setNumberOfWins] = useState(0);
   const [remainingTime, setRemainingTime] = useState(0);
-  // const [totalPoints, setTotalPoints] = useState(0);
+  const [lastWonTimestamp, setLastWonTimestamp] = useState(
+    +localStorage.getItem("lastWonTimestamp") || Date.now()
+  );
   const [userHasWon, setUserHasWon] = useState(false);
   const [cards, setCards] = useState([]);
   const [turns, setTurns] = useState(0);
@@ -78,25 +81,17 @@ const GamePage = () => {
         ? JSON.parse(localStorage.getItem(accountId))
         : null;
 
-      if (curData?.wins && curData?.wins >= 3) {
-        let newLevel = 0;
-        if (
-          typeof curData?.level === "number" &&
-          curData?.level < TOTAL_LEVELS
-        ) {
-          newLevel = curData?.level + 1;
-        }
+      // check if 24 hours have passed since user last won
+      const has24HoursPassedSincelastWin =
+        Date.now() - lastWonTimestamp >= 24 * 60 * 60 * 1000;
 
-        setCurLevel(newLevel);
-        setNumberOfWins(0);
-        setRemainingTime(getTimeForLevel(newLevel)); // TODO: smart contract API to get time for level
-        shuffleCards(newLevel);
-      } else {
-        setCurLevel(curData?.level || 0);
-        setNumberOfWins(curData?.wins || 0);
-        setRemainingTime(getTimeForLevel(curData?.level || 0)); // TODO: smart contract API to get time for level
-        shuffleCards(curData?.level || 0);
-      }
+      // check whether to reset level or not based on when user last played/won
+      const levelToSet = has24HoursPassedSincelastWin ? 0 : curData?.level || 0;
+
+      setCurLevel(levelToSet);
+      setNumberOfWins(0);
+      setRemainingTime(getTimeForLevel(levelToSet)); // TODO: smart contract API to get time for level
+      shuffleCards(levelToSet);
 
       setChoiceOne(null);
       setChoiceTwo(null);
@@ -128,11 +123,12 @@ const GamePage = () => {
       accountId,
       JSON.stringify({
         level: curLevel,
-        wins: numberOfWins,
         points: totalPoints,
+        tempPoints,
+        permPoints: 0,
       })
     );
-  }, [accountId, curLevel, numberOfWins, totalPoints]);
+  }, [accountId, curLevel, totalPoints, tempPoints]);
 
   // compare 2 selected cards
   useUpdateEffect(() => {
@@ -155,13 +151,38 @@ const GamePage = () => {
     }
   }, [choiceOne, choiceTwo]);
 
+  // check if user has won level and award points accordingly
   useUpdateEffect(() => {
     if (numberOfWins >= 3) {
-      if (totalPoints === 0) setRemainingPointsTime(24 * 60 * 60); // TODO: store current time as start time for points expiry
+      if (Date.now() - lastWonTimestamp >= 24 * 60 * 60 * 1000) {
+        alert(
+          "Sorry, it's been 24 hours since you last passed a level, we are resetting your level to 0"
+        );
+        setCurLevel(0);
+        setNumberOfWins(0);
+        shuffleCards(0);
+        setChoiceOne(null);
+        setChoiceTwo(null);
+        setRemainingTime(getTimeForLevel(0));
+        setTurns(0);
+        setUserHasWon(false);
+        setDisabled(false);
+      }
 
-      setPoints(totalPoints + getPointsForLevel(curLevel)); // TODO: smart contract logic for points for level
+      if (tempPoints === 0) setRemainingPointsTime(24 * 60 * 60); // TODO: store current time as start time for points expiry
+
+      localStorage.setItem(
+        accountId,
+        JSON.stringify({
+          level: curLevel + 1,
+          points: totalPoints,
+          tempPoints,
+          permPoints: 0,
+        })
+      );
+      addTempPoints(getPointsForLevel(curLevel)); // TODO: smart contract logic for points for level
     }
-  }, [numberOfWins, curLevel, setPoints]);
+  }, [numberOfWins, curLevel, addTempPoints]);
 
   // timer
   useInterval(() => {
@@ -169,7 +190,9 @@ const GamePage = () => {
 
     if (remainingTime <= 0 || userHasWon) {
       setDisabled(true);
-      return;
+    }
+    if (remainingTime <= 0 && !userHasWon) {
+      setNumberOfWins(0);
     }
 
     setRemainingTime(remainingTime - 1);
@@ -192,7 +215,7 @@ const GamePage = () => {
     if (userHasWon && numberOfWins >= 3) {
       // TODO: perform actions here to update points for user
 
-      const newLevel = curLevel + 1;
+      const newLevel = curLevel >= TOTAL_LEVELS ? TOTAL_LEVELS : curLevel + 1;
       setCurLevel(newLevel);
       setNumberOfWins(0);
       setRemainingTime(getTimeForLevel(newLevel));

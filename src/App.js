@@ -26,6 +26,9 @@ export const App = () => {
     setAccount,
     setBalance,
     setPoints,
+    setTempPoints,
+    setPermPoints,
+    setCoins,
     timeRemaining,
     setTimeRemaining,
     accountLoading,
@@ -44,15 +47,21 @@ export const App = () => {
           const bal = await accountBalance();
           setBalance(bal);
 
-          // TODO: Integrate with smart contract to get points owned by user, and remaining time for the points expiry
+          // TODO: Integrate with smart contract to get points owned by user, and remaining time for the points expiry, as well as coins owned by user
           const accountDetails = JSON.parse(
             localStorage.getItem(acc.accountId)
           );
-          const totalPoints = accountDetails?.points || 0;
+          const tempPoints = accountDetails?.tempPoints || 0;
+          const permPoints = accountDetails?.permPoints || 0;
+          const totalPoints = tempPoints + permPoints;
+          const coins = 5;
           // TODO: adding arbitrary time here, not storing for now, replace with API call values
           const timeRemaining = totalPoints > 0 ? 16 * 60 * 60 : 0;
 
           setPoints(totalPoints);
+          setTempPoints(tempPoints);
+          setPermPoints(permPoints);
+          setCoins(coins);
           setTimeRemaining(timeRemaining);
         }
 

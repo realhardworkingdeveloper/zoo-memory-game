@@ -2,7 +2,7 @@ import useAccount from "../../store/account.store";
 import classes from "./game-points.module.css";
 
 const GamePointsCounter = ({ page = "home" }) => {
-  const { totalPoints, permanentPoints } = useAccount();
+  const { totalPoints, coins } = useAccount();
 
   return (
     <div
@@ -22,7 +22,7 @@ const GamePointsCounter = ({ page = "home" }) => {
           <img src="/img/point-diamond.png" alt="points" />
         </div>
         <div>
-          <span>{permanentPoints}</span>
+          <span>{coins}</span>
         </div>
       </div>
     </div>
