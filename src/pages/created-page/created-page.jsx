@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import CreatedList from "./created-list";
 import Selling from "./selling";
 
@@ -8,7 +8,9 @@ const CreatePage = () => {
 
   return (
     <div className="created">
-      {sellingPage && <Selling {...sellingNft} />}
+      {sellingPage && (
+        <Selling {...sellingNft} setSellingPage={setSellingPage} />
+      )}
 
       {!sellingPage && (
         <CreatedList
@@ -20,4 +22,4 @@ const CreatePage = () => {
   );
 };
 
-export default CreatePage;
+export default memo(CreatePage);
