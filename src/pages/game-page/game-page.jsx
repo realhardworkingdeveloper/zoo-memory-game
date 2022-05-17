@@ -215,19 +215,18 @@ const GamePage = () => {
 
   return (
     <div className={classes.gameBody}>
-      {/* <BackLink />
-      <Logout color="#fff" />
-      <PointsCounter page="game" /> */}
-      <GameWins numberOfWins={numberOfWins} />
-      <GamePointsCounter />
+      <h2>
+        Level {curLevel} of {TOTAL_LEVELS}
+      </h2>
+      <p>
+        <span style={{ fontSize: "2rem" }}>{remainingTime}</span>
+        <span>s</span>
+      </p>
+
+      {/* <GameWins numberOfWins={numberOfWins} />
+      <GamePointsCounter /> */}
       <div className={classes.game}>
-        <h2>
-          Level {curLevel} of {TOTAL_LEVELS}
-        </h2>
-        <p>
-          <span style={{ fontSize: "2rem" }}>{remainingTime}</span>
-          <span>s</span>
-        </p>
+        <GamePointsCounter />
 
         <div
           className={`${classes.cardGrid} ${
@@ -251,18 +250,21 @@ const GamePage = () => {
             );
           })}
         </div>
-        {userHasWon || remainingTime <= 0 ? (
-          <button onClick={replayHandler}>
-            {userHasWon
-              ? numberOfWins >= 3
-                ? "Next Level"
-                : "Replay"
-              : "Try Again"}
-          </button>
-        ) : (
-          <p>Turns: {turns}</p>
-        )}
+
+        <GameWins numberOfWins={numberOfWins} />
       </div>
+
+      {userHasWon || remainingTime <= 0 ? (
+        <button onClick={replayHandler}>
+          {userHasWon
+            ? numberOfWins >= 3
+              ? "Next Level"
+              : "Replay"
+            : "Try Again"}
+        </button>
+      ) : (
+        <p>Turns: {turns}</p>
+      )}
     </div>
   );
 };
