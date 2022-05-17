@@ -17,7 +17,7 @@ export default function Card({
   return (
     <div className="card">
       <div className="card-image" onClick={onClick}>
-        <img src={image} alt="near" />
+        <img src={image} alt="near" style={{ maxWidth: "300px" }} />
       </div>
       <div className="card-content">
         <div className="card-heading">

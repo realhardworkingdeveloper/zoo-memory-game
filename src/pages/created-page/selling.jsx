@@ -47,6 +47,12 @@ const Selling = ({ id, name, ipfsUrl, minterId, description }) => {
               </select>
             </div>
 
+            {/* price */}
+            <div className="form-item">
+              <label htmlFor="price">Price:</label>
+              <input type="number" name="price" id="price" />
+            </div>
+
             {/* royalty in percent */}
             <div className="form-item">
               <label htmlFor="royalty">Royalty:</label>
@@ -56,8 +62,9 @@ const Selling = ({ id, name, ipfsUrl, minterId, description }) => {
         </div>
       </div>
 
-      <div>
-        <Button onClick={() => {}}>btn</Button>
+      <div className="btns-container">
+        <Button onClick={() => {}}>SELL</Button>
+        <Button onClick={() => {}}>CANCEL</Button>
       </div>
     </div>
   );
