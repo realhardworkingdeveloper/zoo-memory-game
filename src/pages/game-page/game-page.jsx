@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Spinner } from "react-bootstrap";
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
 import GameCard from "../../components/game-card/game-card";
@@ -188,7 +187,7 @@ const GamePage = () => {
 
         if (tempPoints === 0) setRemainingPointsTime(24 * 60 * 60); // TODO: store current time as start time for points expiry
         // TODO: store timestamp here for user passing a level
-        localStorage.setItem("lastWonTimestamp", JSON.stringify(Date.now()));
+        // localStorage.setItem("lastWonTimestamp", JSON.stringify(Date.now()));
         setLastWonTimestamp(currentTime);
 
         // const updatedData = await window.contract.set_status({}, BOATLOAD_OF_GAS);

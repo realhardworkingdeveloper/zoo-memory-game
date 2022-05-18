@@ -53,12 +53,12 @@ export const App = () => {
           const accountDetails = await window.contract.get_status({
             account_id: acc.accountId
           });
-
+          
           // const accountDetails = JSON.parse(
           //   localStorage.getItem(acc.accountId)
           // );
-          const tempPoints = accountDetails?.tempPoints || 0;
-          const permPoints = accountDetails?.permPoints || 0;
+          const tempPoints = accountDetails?.temp_points || 0;
+          const permPoints = accountDetails?.perm_points || 0;
           const totalPoints = tempPoints + permPoints;
           const coins = localStorage.getItem("coins") ?? 5;
           // TODO: adding arbitrary time here, not storing for now, replace with API call values
