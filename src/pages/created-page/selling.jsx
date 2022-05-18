@@ -150,9 +150,12 @@ const Selling = ({
         >
           SELL
         </Button>
-        <Button type="reset" disabled={formik.isSubmitting} onClick={exitPage}>
+        {/* <Button type="reset" disabled={formik.isSubmitting} onClick={exitPage}>
           CANCEL
-        </Button>
+        </Button> */}
+        <button className="btn" type="reset" disabled={formik.isSubmitting} onClick={exitPage}>
+          CANCEL
+        </button>
       </div>
     </div>
   );

@@ -21,6 +21,10 @@
     }
     
   }
+
+  &__content{
+    height: 50vh;
+  }
 }
 
 [data-theme="dark"] {
