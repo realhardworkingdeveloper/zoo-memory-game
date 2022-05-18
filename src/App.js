@@ -55,14 +55,15 @@ export const App = () => {
           const tempPoints = accountDetails?.tempPoints || 0;
           const permPoints = accountDetails?.permPoints || 0;
           const totalPoints = tempPoints + permPoints;
-          const coins = 5;
+          const coins = localStorage.getItem("coins") ?? 5;
           // TODO: adding arbitrary time here, not storing for now, replace with API call values
           const timeRemaining = totalPoints > 0 ? 16 * 60 * 60 : 0;
 
           setPoints(totalPoints);
           setTempPoints(tempPoints);
           setPermPoints(permPoints);
-          setCoins(coins);
+          setCoins(+coins);
+          localStorage.setItem("coins", +coins);
           setTimeRemaining(timeRemaining);
         }
 

@@ -1,4 +1,7 @@
-import { NavLink, Route, Routes } from "react-router-dom";
+import { memo } from "react";
+import { Navigate, NavLink, Route, Routes } from "react-router-dom";
+import BuyPage from "../buy-page/buy-page";
+import CreatePage from "../created-page/created-page";
 import MintPage from "../mint-page/mint-page";
 
 const Marketplace = () => {
@@ -33,17 +36,18 @@ const Marketplace = () => {
 
       <div className="marketplace__content">
         <Routes>
-          <Route path="buy" element={ComingSoon} />
+          <Route path="buy" element={<BuyPage />} />
           <Route path="sell" element={ComingSoon} />
           <Route path="collection" element={ComingSoon} />
           <Route path="stake" element={ComingSoon} />
           <Route path="swap" element={ComingSoon} />
           <Route path="mint" element={<MintPage />} />
-          <Route path="created" element={ComingSoon} />
+          <Route path="created" element={<CreatePage />} />
+          <Route path="*" element={<Navigate to="buy" />} />
         </Routes>
       </div>
     </div>
   );
 };
 
-export default Marketplace;
+export default memo(Marketplace);
