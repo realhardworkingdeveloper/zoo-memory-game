@@ -33,10 +33,11 @@ const MintPage = () => {
 
     onSubmit: async (values, { resetForm }) => {
       // TODO: Replace here with smart contract logic for minting NFT
+      console.log("values", values)
 
-      const nftList = JSON.parse(localStorage.getItem("minted"));
-      nftList.push({ ...values, id: v4(), minterId: accountId });
-      localStorage.setItem("minted", JSON.stringify(nftList));
+      // const nftList = JSON.parse(localStorage.getItem("minted"));
+      // nftList.push({ ...values, id: v4(), minterId: accountId });
+      // localStorage.setItem("minted", JSON.stringify(nftList));
 
       // after performing SC stuff
       resetForm();
