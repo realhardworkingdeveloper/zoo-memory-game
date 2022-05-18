@@ -1,0 +1,18 @@
+.created__selling{
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    &__content{
+        display: flex;
+        flex-direction: row;
+
+
+        .card-container{
+
+        }
+
+        .form-container{
+
+        }
+    }
+}

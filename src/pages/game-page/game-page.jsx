@@ -241,21 +241,26 @@ const GamePage = () => {
   if (pageLoading) return;
 
   return (
-    <div className={classes.gameBody}>
-      <h2>
-        Level {curLevel} of {TOTAL_LEVELS}
-      </h2>
-      <p>
-        <span style={{ fontSize: "2rem" }}>{remainingTime}</span>
-        <span>s</span>
-      </p>
+    <div className="game-page">
+      <div className="game-stats">
+        <div className="points">
+        <GamePointsCounter/>
+        </div>
+        <div className="levels">
+          <h2>Level {curLevel} of {TOTAL_LEVELS}</h2>
 
-      {/* <GameWins numberOfWins={numberOfWins} />
-      <GamePointsCounter /> */}
-      <div className={classes.game}>
-        <GamePointsCounter />
+          <p>
+            <span style={{ fontSize: "1.5rem" }}>{remainingTime}</span>
+            <span>s</span>
+          </p>
 
-        <div
+        </div>
+        <div className="wins">
+        <GameWins numberOfWins={numberOfWins} />
+        </div>
+      </div>
+      <div className="game-body">
+      <div
           className={`${classes.cardGrid} ${
             curLevel >= CUTOFF_LEVEL ? classes.row5 : ""
           }`}
@@ -276,23 +281,74 @@ const GamePage = () => {
               />
             );
           })}
-        </div>
-
-        <GameWins numberOfWins={numberOfWins} />
       </div>
-
+      <div className="turns">
       {userHasWon || remainingTime <= 0 ? (
-        <button onClick={replayHandler}>
+        <button onClick={replayHandler} className="btn">
           {userHasWon
             ? numberOfWins >= 3
               ? "Next Level"
-              : "Replay"
+              : "Re-play"
             : "Try Again"}
         </button>
       ) : (
-        <p>Turns: {turns}</p>
+        <p style={{"color": "var(--accent-color3)"}}>Turns: {turns}</p>
       )}
+      </div>
+      </div>
     </div>
+    // <div className="gameBody">
+    //   <h2>
+    //     Level {curLevel} of {TOTAL_LEVELS}
+    //   </h2>
+    //   <p>
+    //     <span style={{ fontSize: "2rem" }}>{remainingTime}</span>
+    //     <span>s</span>
+    //   </p>
+
+    //   {/* <GameWins numberOfWins={numberOfWins} />
+    //   <GamePointsCounter /> */}
+    //   <div className="game">
+    //     <GamePointsCounter />
+
+        // <div
+        //   className={`${classes.cardGrid} ${
+        //     curLevel >= CUTOFF_LEVEL ? classes.row5 : ""
+        //   }`}
+        // >
+        //   {cards.map((card) => {
+        //     const isCardFlipped =
+        //       card?.id === choiceOne?.id ||
+        //       card?.id === choiceTwo?.id ||
+        //       card?.matched;
+
+        //     return (
+        //       <GameCard
+        //         key={card.id}
+        //         card={card}
+        //         handleChoice={handleChoice}
+        //         flipped={isCardFlipped}
+        //         disabled={disabled || isCardFlipped}
+        //       />
+        //     );
+        //   })}
+        // </div>
+
+    //     <GameWins numberOfWins={numberOfWins} />
+    //   </div>
+
+    //   {userHasWon || remainingTime <= 0 ? (
+    //     <button onClick={replayHandler}>
+    //       {userHasWon
+    //         ? numberOfWins >= 3
+    //           ? "Next Level"
+    //           : "Replay"
+    //         : "Try Again"}
+    //     </button>
+    //   ) : (
+    //     <p>Turns: {turns}</p>
+    //   )}
+    // </div>
   );
 };
 

@@ -1,0 +1,123 @@
+// .gameBody {
+//     margin: 0 auto;
+//     font-size: 1.5rem;
+//     text-align: center;
+  
+//     position: relative;
+//     color: #fff;
+//     height: 100vh;
+//   }
+  
+//   @media screen and (max-width: 900px) {
+//     .gameBody {
+//       font-size: 1rem;
+//     }
+//   }
+  
+//   @media screen and (max-width: 640px) {
+//     .gameBody {
+//       font-size: 0.8rem;
+//     }
+//   }
+  
+//   .game {
+//     /* margin: 2rem auto;
+//     padding: 0 5rem; */
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: space-between;
+//   }
+  
+//   .gameBody p {
+//     margin-top: 0.75em;
+//   }
+  
+//   .gameBody button {
+//     margin-top: 0.75em;
+//     background: none;
+//     border: 2px solid #fff;
+//     padding: 0.375rem 0.75rem;
+//     border-radius: 4px;
+//     color: #fff;
+//     font-weight: bold;
+//     cursor: pointer;
+//     font-size: 1em;
+//   }
+  
+//   .gameBody h2 {
+//     margin-top: 0.5em;
+//   }
+  
+//   @media screen and (max-width: 1280px) {
+//     .gameBody h2 {
+//       margin-top: 0.25em;
+//     }
+//     .gameBody p,
+//     .gameBody button {
+//       margin-top: 0.25em;
+//     }
+//   }
+  
+//   .gameBody button:hover {
+//     background: #c23866;
+//     color: #fff;
+//   }
+  
+//   .cardGrid {
+//     display: grid;
+//     margin: auto;
+//     width: 55%;
+//     grid-template-columns: 1fr 1fr 1fr 1fr;
+//     gap: 1.25rem;
+//   }
+  
+//   .cardGrid.row5 {
+//     width: 65%;
+//     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+//     gap: 1rem;
+//   }
+  
+
+
+.game-page{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin:3rem 2rem;
+    font-family: 'Kg Red';
+
+    .game-stats{
+        display: flex;
+        justify-content: space-evenly;
+        h2, p {
+            color: var(--accent-color3)
+        }
+
+        .levels{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+
+        .wins{
+            span {
+                color: var(--accent-color3);
+            }
+        }
+    }
+
+    .turns{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 2rem;
+        p{
+            color: var(--accent-color3);
+        }
+    }
+
+    
+}
