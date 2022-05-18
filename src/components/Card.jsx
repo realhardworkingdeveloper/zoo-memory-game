@@ -13,6 +13,7 @@ export default function Card({
   bidText,
   onClick,
   onClickBtn,
+  btnDisabled,
 }) {
   return (
     <div className="card">
@@ -41,6 +42,7 @@ export default function Card({
         <button
           className={`${buyVisible ? "" : "buy-visible"}`}
           onClick={onClickBtn}
+          disabled={btnDisabled}
         >
           {buttonText}
         </button>

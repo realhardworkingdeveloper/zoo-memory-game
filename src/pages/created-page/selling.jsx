@@ -56,6 +56,7 @@ const Selling = ({
         royalty: +values.royalty,
         topBid: +values.price,
         numSold: 0,
+        buyersList: [],
       });
       localStorage.setItem("marketplace", JSON.stringify(marketplaceList));
 
