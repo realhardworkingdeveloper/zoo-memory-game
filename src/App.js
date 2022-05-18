@@ -60,7 +60,7 @@ export const App = () => {
           const tempPoints = accountDetails?.points || 0;
           const permPoints = accountDetails?.permPoints || 0;
           const totalPoints = tempPoints + permPoints;
-          const coins = 5;
+          const coins = localStorage.getItem("coins") ?? 5;
           // TODO: adding arbitrary time here, not storing for now, replace with API call values
           const currentTime = await getWorldTime();
           const timeRemaining = currentTime - accountDetails.issued_at > 24 * 60 * 60 ? 0 : 24 * 60 * 60 - (currentTime - accountDetails.issued_at);
@@ -68,7 +68,8 @@ export const App = () => {
           setPoints(totalPoints);
           setTempPoints(tempPoints);
           setPermPoints(permPoints);
-          setCoins(coins);
+          setCoins(+coins);
+          localStorage.setItem("coins", +coins);
           setTimeRemaining(timeRemaining);
         }
 

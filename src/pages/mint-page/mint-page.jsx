@@ -4,6 +4,9 @@ import { v4 } from "uuid";
 import Button from "../../components/button/button";
 import useAccount from "../../store/account.store";
 
+import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
+
 const MintPage = () => {
   const { accountId } = useAccount();
 
@@ -13,12 +16,21 @@ const MintPage = () => {
       localStorage.setItem("minted", JSON.stringify([]));
   }, []);
 
+  const navigate = useNavigate();
+
   const form = useFormik({
     initialValues: {
       name: "",
       ipfsUrl: "",
       description: "",
     },
+
+    validationSchema: Yup.object().shape({
+      name: Yup.string().required("Name is required").min(3).max(30),
+      ipfsUrl: Yup.string().required("Image URL is required").url(),
+      description: Yup.string().max("100"),
+    }),
+
     onSubmit: async (values, { resetForm }) => {
       // TODO: Replace here with smart contract logic for minting NFT
 
@@ -28,6 +40,7 @@ const MintPage = () => {
 
       // after performing SC stuff
       resetForm();
+      navigate("../created");
     },
   });
 
