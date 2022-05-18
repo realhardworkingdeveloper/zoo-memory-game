@@ -17,8 +17,23 @@ export async function initializeContract() {
     window.walletConnection.account(),
     nearEnv.contractName,
     {
-      viewMethods: ["get_status"],
-      changeMethods: ["set_status"],
+      viewMethods: [
+        "get_status",
+        "get_auction",
+        "get_current_token_number",
+        "nft_tokens_for_owner"
+      ],
+      changeMethods: [
+        "set_status",
+        "nft_mint",
+        "nft_transfer",
+        "nft_transfer_call",
+        "create_auction",
+        "bid",
+        "claim_nft",
+        "claim_near",
+        "claim_back_nft"
+      ],
     }
   );
 }
