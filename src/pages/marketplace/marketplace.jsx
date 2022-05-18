@@ -3,6 +3,7 @@ import { Navigate, NavLink, Route, Routes } from "react-router-dom";
 import BuyPage from "../buy-page/buy-page";
 import CreatePage from "../created-page/created-page";
 import MintPage from "../mint-page/mint-page";
+import CollectionPage from "../collection-page/collection-page";
 
 const Marketplace = () => {
   const ComingSoon = <h1 style={{ textAlign: "center" }}>Coming soon</h1>;
@@ -38,7 +39,7 @@ const Marketplace = () => {
         <Routes>
           <Route path="buy" element={<BuyPage />} />
           {/* <Route path="sell" element={ComingSoon} /> */}
-          <Route path="collection" element={ComingSoon} />
+          <Route path="collection" element={<CollectionPage />} />
           <Route path="stake" element={ComingSoon} />
           <Route path="swap" element={ComingSoon} />
           <Route path="mint" element={<MintPage />} />
