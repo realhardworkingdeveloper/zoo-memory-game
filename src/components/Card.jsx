@@ -43,7 +43,8 @@ export default function Card({
           onClick={accountInfo}
           style={{"cursor": "pointer"}}
           >@{tag}</span>
-          <span>{time || 0} sold</span>
+          {/* <span>{time || 0} sold</span> */}
+          <span>#12313{time}</span>
         </div>
 
         <button
