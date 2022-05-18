@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
+import { Spinner } from "react-bootstrap";
+import BlockUi from 'react-block-ui';
+import 'react-block-ui/style.css';
 import GameCard from "../../components/game-card/game-card";
 import classes from "./game-page.module.css";
 import useAccount from "../../store/account.store";
 
 import { v4 } from "uuid";
+import Big from "big.js";
 import {
   getPointsForLevel,
   getTimeForLevel,
@@ -22,6 +26,7 @@ import { getWorldTime } from "../../utils/date-time";
 const GamePage = () => {
   const TOTAL_LEVELS = 10;
   const CUTOFF_LEVEL = 5;
+  const BOATLOAD_OF_GAS = Big(3).times(10 ** 13).toFixed();
 
   const {
     totalPoints,
@@ -43,15 +48,14 @@ const GamePage = () => {
   const [curLevel, setCurLevel] = useState(0);
   const [numberOfWins, setNumberOfWins] = useState(0);
   const [remainingTime, setRemainingTime] = useState(0);
-  const [lastWonTimestamp, setLastWonTimestamp] = useState(
-    +localStorage.getItem("lastWonTimestamp") || Date.now()
-  );
+  const [lastWonTimestamp, setLastWonTimestamp] = useState();
   const [userHasWon, setUserHasWon] = useState(false);
   const [cards, setCards] = useState([]);
   const [turns, setTurns] = useState(0);
   const [choiceOne, setChoiceOne] = useState(null);
   const [choiceTwo, setChoiceTwo] = useState(null);
   const [disabled, setDisabled] = useState(false);
+  const [isNextLeveling, setIsNextLeveling] = useState(false);
 
   // get account details
   const { accountId, isWalletConnected } = useAccount();
@@ -83,7 +87,7 @@ const GamePage = () => {
       });
       console.log("curData", curData)
 
-      const lastWonTimestamp = curData.issued_at;
+      const lastWonTimestamp = curData?.last_updated_at ? curData?.last_updated_at : 0;
       setLastWonTimestamp(lastWonTimestamp);
 
       const currentTime = await getWorldTime();
@@ -164,38 +168,43 @@ const GamePage = () => {
 
   // check if user has won level and award points accordingly
   useUpdateEffect(() => {
-    if (numberOfWins >= 3) {
-      if (Date.now() - lastWonTimestamp >= 24 * 60 * 60 * 1000) {
-        alert(
-          "Sorry, it's been 24 hours since you last passed a level, we are resetting your level to 0"
-        );
-        setCurLevel(0);
-        setNumberOfWins(0);
-        shuffleCards(0);
-        setChoiceOne(null);
-        setChoiceTwo(null);
-        setRemainingTime(getTimeForLevel(0));
-        setTurns(0);
-        setUserHasWon(false);
-        setDisabled(false);
+    (async () => {
+      if (numberOfWins >= 3) {
+        const currentTime = await getWorldTime();
+        if (currentTime - lastWonTimestamp >= 24 * 60 * 60) {
+          alert(
+            "Sorry, it's been 24 hours since you last passed a level, we are resetting your level to 0"
+          );
+          setCurLevel(0);
+          setNumberOfWins(0);
+          shuffleCards(0);
+          setChoiceOne(null);
+          setChoiceTwo(null);
+          setRemainingTime(getTimeForLevel(0));
+          setTurns(0);
+          setUserHasWon(false);
+          setDisabled(false);
+        }
+
+        if (tempPoints === 0) setRemainingPointsTime(24 * 60 * 60); // TODO: store current time as start time for points expiry
+        // TODO: store timestamp here for user passing a level
+        localStorage.setItem("lastWonTimestamp", JSON.stringify(Date.now()));
+        setLastWonTimestamp(currentTime);
+
+        // const updatedData = await window.contract.set_status({}, BOATLOAD_OF_GAS);
+        // console.log("=======updatedData=======", updatedData)
+        // localStorage.setItem(
+        //   accountId,
+        //   JSON.stringify({
+        //     level: curLevel + 1,
+        //     points: totalPoints,
+        //     tempPoints,
+        //     permPoints: 0,
+        //   })
+        // );
+        // addTempPoints(getPointsForLevel(curLevel)); // TODO: smart contract logic for points for level
       }
-
-      if (tempPoints === 0) setRemainingPointsTime(24 * 60 * 60); // TODO: store current time as start time for points expiry
-      // TODO: store timestamp here for user passing a level
-      localStorage.setItem("lastWonTimestamp", JSON.stringify(Date.now()));
-      setLastWonTimestamp(Date.now());
-
-      localStorage.setItem(
-        accountId,
-        JSON.stringify({
-          level: curLevel + 1,
-          points: totalPoints,
-          tempPoints,
-          permPoints: 0,
-        })
-      );
-      addTempPoints(getPointsForLevel(curLevel)); // TODO: smart contract logic for points for level
-    }
+    })()
   }, [numberOfWins, curLevel, addTempPoints]);
 
   // timer
@@ -225,9 +234,14 @@ const GamePage = () => {
     setDisabled(false);
   };
 
-  const replayHandler = () => {
+  const replayHandler = async () => {
     if (userHasWon && numberOfWins >= 3) {
+      // await window.contract.set_status({}, BOATLOAD_OF_GAS);
       // TODO: perform actions here to update points for user
+      console.log("==========updating=============")
+      await window.contract.set_status({}, BOATLOAD_OF_GAS);
+      console.log("==========updated=============")
+      addTempPoints(getPointsForLevel(curLevel));
 
       const newLevel = curLevel >= TOTAL_LEVELS ? TOTAL_LEVELS : curLevel + 1;
       setCurLevel(newLevel);
@@ -252,57 +266,59 @@ const GamePage = () => {
   if (pageLoading) return;
 
   return (
-    <div className={classes.gameBody}>
-      <h2>
-        Level {curLevel} of {TOTAL_LEVELS}
-      </h2>
-      <p>
-        <span style={{ fontSize: "2rem" }}>{remainingTime}</span>
-        <span>s</span>
-      </p>
+    <BlockUi tag="div" blocking={!isNextLeveling}>
+      <div className={classes.gameBody}>
+        <h2>
+          Level {curLevel} of {TOTAL_LEVELS}
+        </h2>
+        <p>
+          <span style={{ fontSize: "2rem" }}>{remainingTime}</span>
+          <span>s</span>
+        </p>
 
-      {/* <GameWins numberOfWins={numberOfWins} />
+        {/* <GameWins numberOfWins={numberOfWins} />
       <GamePointsCounter /> */}
-      <div className={classes.game}>
-        <GamePointsCounter />
+        <div className={classes.game}>
+          <GamePointsCounter />
 
-        <div
-          className={`${classes.cardGrid} ${curLevel >= CUTOFF_LEVEL ? classes.row5 : ""
-            }`}
-        >
-          {cards.map((card) => {
-            const isCardFlipped =
-              card?.id === choiceOne?.id ||
-              card?.id === choiceTwo?.id ||
-              card?.matched;
+          <div
+            className={`${classes.cardGrid} ${curLevel >= CUTOFF_LEVEL ? classes.row5 : ""
+              }`}
+          >
+            {cards.map((card) => {
+              const isCardFlipped =
+                card?.id === choiceOne?.id ||
+                card?.id === choiceTwo?.id ||
+                card?.matched;
 
-            return (
-              <GameCard
-                key={card.id}
-                card={card}
-                handleChoice={handleChoice}
-                flipped={isCardFlipped}
-                disabled={disabled || isCardFlipped}
-              />
-            );
-          })}
+              return (
+                <GameCard
+                  key={card.id}
+                  card={card}
+                  handleChoice={handleChoice}
+                  flipped={isCardFlipped}
+                  disabled={disabled || isCardFlipped}
+                />
+              );
+            })}
+          </div>
+
+          <GameWins numberOfWins={numberOfWins} />
         </div>
 
-        <GameWins numberOfWins={numberOfWins} />
+        {userHasWon || remainingTime <= 0 || true ? (
+          <button onClick={replayHandler}>
+            {userHasWon
+              ? numberOfWins >= 3
+                ? "Next Level"
+                : "Replay"
+              : "Try Again"}
+          </button>
+        ) : (
+          <p>Turns: {turns}</p>
+        )}
       </div>
-
-      {userHasWon || remainingTime <= 0 ? (
-        <button onClick={replayHandler}>
-          {userHasWon
-            ? numberOfWins >= 3
-              ? "Next Level"
-              : "Replay"
-            : "Try Again"}
-        </button>
-      ) : (
-        <p>Turns: {turns}</p>
-      )}
-    </div>
+    </BlockUi>
   );
 };
 
