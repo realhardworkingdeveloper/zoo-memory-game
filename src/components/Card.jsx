@@ -14,7 +14,11 @@ export default function Card({
   onClick,
   onClickBtn,
   btnDisabled,
-}) {
+}) 
+{
+  const accountInfo = () => {
+    window.open(`https://explorer.testnet.near.org/accounts/${tag}`, "_blank");
+  };
   return (
     <div className="card">
       <div className="card-image" onClick={onClick}>
@@ -35,7 +39,10 @@ export default function Card({
           </div>
         </div>
         <div className="card-sub-details">
-          <span>@{tag}</span>
+          <span 
+          onClick={accountInfo}
+          style={{"cursor": "pointer"}}
+          >@{tag}</span>
           <span>{time || 0} sold</span>
         </div>
 
