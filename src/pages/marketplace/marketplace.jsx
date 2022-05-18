@@ -14,9 +14,9 @@ const Marketplace = () => {
         <NavLink className={cls} to="buy">
           BUY
         </NavLink>
-        <NavLink className={cls} to="sell">
+        {/* <NavLink className={cls} to="sell">
           SELL
-        </NavLink>
+        </NavLink> */}
         <NavLink className={cls} to="collection">
           COLLECTION
         </NavLink>
@@ -37,7 +37,7 @@ const Marketplace = () => {
       <div className="marketplace__content">
         <Routes>
           <Route path="buy" element={<BuyPage />} />
-          <Route path="sell" element={ComingSoon} />
+          {/* <Route path="sell" element={ComingSoon} /> */}
           <Route path="collection" element={ComingSoon} />
           <Route path="stake" element={ComingSoon} />
           <Route path="swap" element={ComingSoon} />

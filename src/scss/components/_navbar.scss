@@ -56,6 +56,22 @@ nav {
                         color: var(--pink);
                     }
                 }
+
+                .accountInfo{
+                    .walletDiv{
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                    gap: 0.4rem;
+
+                    svg{
+                        color: var(--accent-color3);
+                        cursor: pointer;
+                    }
+                    
+                    }
+
+                }
             }
         }
     }

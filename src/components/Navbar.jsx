@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { MdClose } from "react-icons/md";
+import { MdClose, MdLogout } from "react-icons/md";
 import { ImSun } from "react-icons/im";
 import { BsFillMoonFill } from "react-icons/bs";
 import { login, logout } from "../utils/near";
@@ -24,6 +24,9 @@ export default function Navbar({ changeTheme, currentTheme }) {
       login();
       return false;
     }
+  };
+  const accountInfo = () => {
+    window.open(`https://explorer.testnet.near.org/accounts/${accountId}`, "_blank");
   };
 
   return (
@@ -74,7 +77,17 @@ export default function Navbar({ changeTheme, currentTheme }) {
             <a href="#newsletter">Newsletter</a>
           </li>
           <li>
-            <button onClick={loginLogout} className="wallet">
+            <div className="accountInfo">
+              {isWalletConnected ? (
+                <div className="walletDiv">
+                <button className="wallet" onClick={accountInfo}>{accountId}</button>
+                <MdLogout size={20} onClick={loginLogout}/>
+                </div>
+              ) : (
+                <button className="wallet" onClick={loginLogout}>Connect Near</button>
+              )}
+            </div>
+            {/* <button onClick={loginLogout} className="wallet">
               {isWalletConnected ? (
                 <span>
                   <span>{accountId} </span>
@@ -87,7 +100,7 @@ export default function Navbar({ changeTheme, currentTheme }) {
               ) : (
                 "Connect Near"
               )}
-            </button>
+            </button> */}
           </li>
           <li onClick={changeTheme} style={{ cursor: "pointer" }}>
             {currentTheme === "dark" ? (

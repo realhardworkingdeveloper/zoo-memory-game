@@ -63,7 +63,17 @@ export const App = () => {
           const coins = localStorage.getItem("coins") ?? 5;
           // TODO: adding arbitrary time here, not storing for now, replace with API call values
           const currentTime = await getWorldTime();
-          const timeRemaining = currentTime - accountDetails?.last_updated_at > 24 * 60 * 60 ? 0 : 24 * 60 * 60 - (currentTime - accountDetails?.last_updated_at);
+          const timeRemaining =
+            accountDetails?.last_updated_at
+              ?
+              (
+                currentTime - accountDetails?.last_updated_at > 24 * 60 * 60
+                  ?
+                  0
+                  :
+                  24 * 60 * 60 - (currentTime - accountDetails?.last_updated_at)
+              )
+              : 24 * 60 * 60;
 
           setPoints(totalPoints);
           setTempPoints(tempPoints);

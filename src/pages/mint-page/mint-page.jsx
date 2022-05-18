@@ -59,7 +59,7 @@ const MintPage = () => {
           type="text"
           name="ipfsUrl"
           id="ipfsUrl"
-          placeholder="IPFS Url"
+          placeholder="IPFS url"
           value={form.values.ipfsUrl}
           onChange={form.handleChange}
         />

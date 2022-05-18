@@ -87,10 +87,10 @@ const GamePage = () => {
       });
       console.log("curData", curData)
 
-      const lastWonTimestamp = curData?.last_updated_at ? curData?.last_updated_at : 0;
-      setLastWonTimestamp(lastWonTimestamp);
-
       const currentTime = await getWorldTime();
+
+      const lastWonTimestamp = curData?.last_updated_at ? curData?.last_updated_at : currentTime;
+      setLastWonTimestamp(lastWonTimestamp);
 
       // const curData = localStorage.getItem(accountId)
       //   ? JSON.parse(localStorage.getItem(accountId))
@@ -238,6 +238,7 @@ const GamePage = () => {
     if (userHasWon && numberOfWins >= 3) {
       // await window.contract.set_status({}, BOATLOAD_OF_GAS);
       // TODO: perform actions here to update points for user
+      setIsNextLeveling(true);
       console.log("==========updating=============")
       await window.contract.set_status({}, BOATLOAD_OF_GAS);
       console.log("==========updated=============")
@@ -248,6 +249,8 @@ const GamePage = () => {
       setNumberOfWins(0);
       setRemainingTime(getTimeForLevel(newLevel));
       shuffleCards(newLevel);
+
+      setIsNextLeveling(false);
     } else {
       setRemainingTime(getTimeForLevel(curLevel));
       shuffleCards(curLevel);
@@ -266,21 +269,26 @@ const GamePage = () => {
   if (pageLoading) return;
 
   return (
-    <BlockUi tag="div" blocking={!isNextLeveling}>
-      <div className={classes.gameBody}>
-        <h2>
-          Level {curLevel} of {TOTAL_LEVELS}
-        </h2>
-        <p>
-          <span style={{ fontSize: "2rem" }}>{remainingTime}</span>
-          <span>s</span>
-        </p>
+    <BlockUi tag="div" blocking={isNextLeveling}>
+      <div className="game-page">
+        <div className="game-stats">
+          <div className="points">
+            <GamePointsCounter />
+          </div>
+          <div className="levels">
+            <h2>Level {curLevel} of {TOTAL_LEVELS}</h2>
 
-        {/* <GameWins numberOfWins={numberOfWins} />
-      <GamePointsCounter /> */}
-        <div className={classes.game}>
-          <GamePointsCounter />
+            <p>
+              <span style={{ fontSize: "1.5rem" }}>{remainingTime}</span>
+              <span>s</span>
+            </p>
 
+          </div>
+          <div className="wins">
+            <GameWins numberOfWins={numberOfWins} />
+          </div>
+        </div>
+        <div className="game-body">
           <div
             className={`${classes.cardGrid} ${curLevel >= CUTOFF_LEVEL ? classes.row5 : ""
               }`}
@@ -302,23 +310,74 @@ const GamePage = () => {
               );
             })}
           </div>
-
-          <GameWins numberOfWins={numberOfWins} />
+          <div className="turns">
+            {userHasWon || remainingTime <= 0 ? (
+              <button onClick={replayHandler} className="btn">
+                {userHasWon
+                  ? numberOfWins >= 3
+                    ? "Next Level"
+                    : "Re-play"
+                  : "Try Again"}
+              </button>
+            ) : (
+              <p style={{ "color": "var(--accent-color3)" }}>Turns: {turns}</p>
+            )}
+          </div>
         </div>
-
-        {userHasWon || remainingTime <= 0 || true ? (
-          <button onClick={replayHandler}>
-            {userHasWon
-              ? numberOfWins >= 3
-                ? "Next Level"
-                : "Replay"
-              : "Try Again"}
-          </button>
-        ) : (
-          <p>Turns: {turns}</p>
-        )}
       </div>
     </BlockUi>
+    // <div className="gameBody">
+    //   <h2>
+    //     Level {curLevel} of {TOTAL_LEVELS}
+    //   </h2>
+    //   <p>
+    //     <span style={{ fontSize: "2rem" }}>{remainingTime}</span>
+    //     <span>s</span>
+    //   </p>
+
+    //   {/* <GameWins numberOfWins={numberOfWins} />
+    //   <GamePointsCounter /> */}
+    //   <div className="game">
+    //     <GamePointsCounter />
+
+    // <div
+    //   className={`${classes.cardGrid} ${
+    //     curLevel >= CUTOFF_LEVEL ? classes.row5 : ""
+    //   }`}
+    // >
+    //   {cards.map((card) => {
+    //     const isCardFlipped =
+    //       card?.id === choiceOne?.id ||
+    //       card?.id === choiceTwo?.id ||
+    //       card?.matched;
+
+    //     return (
+    //       <GameCard
+    //         key={card.id}
+    //         card={card}
+    //         handleChoice={handleChoice}
+    //         flipped={isCardFlipped}
+    //         disabled={disabled || isCardFlipped}
+    //       />
+    //     );
+    //   })}
+    // </div>
+
+    //     <GameWins numberOfWins={numberOfWins} />
+    //   </div>
+
+    //   {userHasWon || remainingTime <= 0 ? (
+    //     <button onClick={replayHandler}>
+    //       {userHasWon
+    //         ? numberOfWins >= 3
+    //           ? "Next Level"
+    //           : "Replay"
+    //         : "Try Again"}
+    //     </button>
+    //   ) : (
+    //     <p>Turns: {turns}</p>
+    //   )}
+    // </div>
   );
 };
 
