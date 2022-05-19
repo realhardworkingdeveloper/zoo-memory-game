@@ -10,7 +10,6 @@ const Marketplace = () => {
   const cls = ({ isActive }) => (isActive ? "active" : "");
   const { REACT_APP_CONTRACT_NAME } = process.env;
 
-
   return (
     <div className="marketplace">
       <div className="marketplace__nav">
@@ -20,34 +19,29 @@ const Marketplace = () => {
         {/* <NavLink className={cls} to="sell">
           SELL
         </NavLink> */}
-        {
-          REACT_APP_CONTRACT_NAME != window.accountId && (
-            <>
-              <NavLink className={cls} to="collection">
-                COLLECTIBLES
-              </NavLink>
-              <NavLink className={cls} to="stake">
-                STAKE
-              </NavLink>
-              <NavLink className={cls} to="swap">
-                SWAP
-              </NavLink>
-            </>
-          )
-        }
-        {
-          REACT_APP_CONTRACT_NAME == window.accountId && (
-            <>
-              <NavLink className={cls} to="mint">
-                MINT
-              </NavLink>
-              <NavLink className={cls} to="created">
-                CREATED
-              </NavLink>
-            </>
-          )
-        }
-
+        {REACT_APP_CONTRACT_NAME !== window.accountId && (
+          <>
+            <NavLink className={cls} to="collection">
+              COLLECTIBLES
+            </NavLink>
+            <NavLink className={cls} to="stake">
+              STAKE
+            </NavLink>
+            <NavLink className={cls} to="swap">
+              SWAP
+            </NavLink>
+          </>
+        )}
+        {REACT_APP_CONTRACT_NAME === window.accountId && (
+          <>
+            <NavLink className={cls} to="mint">
+              MINT
+            </NavLink>
+            <NavLink className={cls} to="created">
+              CREATED
+            </NavLink>
+          </>
+        )}
       </div>
 
       <div className="marketplace__content">

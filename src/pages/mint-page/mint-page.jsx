@@ -1,22 +1,21 @@
 import { useFormik } from "formik";
 
 import { useEffect, useState } from "react";
-import BlockUi from 'react-block-ui';
-import 'react-block-ui/style.css';
+import BlockUi from "react-block-ui";
+import "react-block-ui/style.css";
 
 import { utils } from "near-api-js";
-import { v4 } from "uuid";
+// import { v4 } from "uuid";
 import Button from "../../components/button/button";
 import useAccount from "../../store/account.store";
 
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
-const BN = require("bn.js");
+// import { useNavigate } from "react-router-dom";
+// const BN = require("bn.js");
 
 const MintPage = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const { accountId } = useAccount();
-
 
   useEffect(() => {
     // set up localStorage for our usage
@@ -24,7 +23,7 @@ const MintPage = () => {
       localStorage.setItem("minted", JSON.stringify([]));
   }, []);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const form = useFormik({
     initialValues: {
@@ -42,9 +41,10 @@ const MintPage = () => {
     onSubmit: async (values, { resetForm }) => {
       // TODO: Replace here with smart contract logic for minting NFT
       try {
-        setIsProcessing(true)
-        const get_current_token_number = await window.contract.get_current_token_number();
-        console.log("current_token_number", get_current_token_number)
+        setIsProcessing(true);
+        const get_current_token_number =
+          await window.contract.get_current_token_number();
+        console.log("current_token_number", get_current_token_number);
         const result = await window.contract.nft_mint(
           {
             token_id: `${get_current_token_number}`,
@@ -52,21 +52,21 @@ const MintPage = () => {
               title: values.name,
               description: values.description,
               media: values.ipfsUrl,
-              copies: 1
+              copies: 1,
             },
             receiver_id: accountId,
           },
           300000000000000, // attached GAS (optional)
           utils.format.parseNearAmount("0.1")
         );
-        console.log("result", result)
-        setIsProcessing(false)
+        console.log("result", result);
+        setIsProcessing(false);
         // after performing SC stuff
         resetForm();
         // navigate("../created");
       } catch (err) {
-        console.log("minting err", err)
-        setIsProcessing(false)
+        console.log("minting err", err);
+        setIsProcessing(false);
       }
     },
   });
@@ -107,7 +107,6 @@ const MintPage = () => {
         </form>
       </div>
     </BlockUi>
-
   );
 };
 
