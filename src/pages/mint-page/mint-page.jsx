@@ -1,10 +1,12 @@
 import { useFormik } from "formik";
+
 import { useEffect, useState } from "react";
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
 
 import { v4 } from "uuid";
 import Big from "big.js";
+
 import Button from "../../components/button/button";
 import useAccount from "../../store/account.store";
 
@@ -16,6 +18,7 @@ const MintPage = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const { accountId } = useAccount();
   const BOATLOAD_OF_GAS = Big(1).times(10 ** 13).toFixed();
+
 
   useEffect(() => {
     // set up localStorage for our usage
@@ -106,6 +109,7 @@ const MintPage = () => {
         </form>
       </div>
     </BlockUi>
+
   );
 };
 

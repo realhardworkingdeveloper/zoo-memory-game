@@ -10,6 +10,7 @@ const Marketplace = () => {
   const cls = ({ isActive }) => (isActive ? "active" : "");
   const { REACT_APP_CONTRACT_NAME } = process.env;
 
+
   return (
     <div className="marketplace">
       <div className="marketplace__nav">
@@ -46,6 +47,7 @@ const Marketplace = () => {
             </>
           )
         }
+
       </div>
 
       <div className="marketplace__content">

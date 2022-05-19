@@ -8,6 +8,7 @@ const CreatedList = ({ setSellingPage, setSellingNft }) => {
   useEffect(() => {
     (async () => {
       // TODO: add SC call here to fetch list of minted NFTs, using localStorage for dummy data
+
       const minted = await window.contract.nft_tokens_for_owner({
         account_id: window.accountId
       })
