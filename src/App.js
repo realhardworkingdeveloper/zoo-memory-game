@@ -18,6 +18,7 @@ import "./scss/index.scss";
 // NEAR utils
 import { accountBalance, initializeContract } from "./utils/near";
 import GamePage from "./pages/game-page/game-page";
+import { getWorldTime } from "./utils/date-time";
 import Marketplace from "./pages/marketplace/marketplace";
 
 export const App = () => {
@@ -49,15 +50,30 @@ export const App = () => {
           setBalance(bal);
 
           // TODO: Integrate with smart contract to get points owned by user, and remaining time for the points expiry, as well as coins owned by user
-          const accountDetails = JSON.parse(
-            localStorage.getItem(acc.accountId)
-          );
-          const tempPoints = accountDetails?.tempPoints || 0;
-          const permPoints = accountDetails?.permPoints || 0;
+          const accountDetails = await window.contract.get_status({
+            account_id: acc.accountId
+          });
+          
+          // const accountDetails = JSON.parse(
+          //   localStorage.getItem(acc.accountId)
+          // );
+          const tempPoints = accountDetails?.temp_points || 0;
+          const permPoints = accountDetails?.perm_points || 0;
           const totalPoints = tempPoints + permPoints;
           const coins = localStorage.getItem("coins") ?? 5;
           // TODO: adding arbitrary time here, not storing for now, replace with API call values
-          const timeRemaining = totalPoints > 0 ? 16 * 60 * 60 : 0;
+          const currentTime = await getWorldTime();
+          const timeRemaining =
+            accountDetails?.last_updated_at
+              ?
+              (
+                currentTime - accountDetails?.last_updated_at > 24 * 60 * 60
+                  ?
+                  0
+                  :
+                  24 * 60 * 60 - (currentTime - accountDetails?.last_updated_at)
+              )
+              : 24 * 60 * 60;
 
           setPoints(totalPoints);
           setTempPoints(tempPoints);

@@ -8,9 +8,11 @@ const CreatedList = ({ setSellingPage, setSellingNft }) => {
   useEffect(() => {
     (async () => {
       // TODO: add SC call here to fetch list of minted NFTs, using localStorage for dummy data
-      const minted = localStorage.getItem("minted")
-        ? JSON.parse(localStorage.getItem("minted"))
-        : [];
+
+      const minted = await window.contract.nft_tokens_for_owner({
+        account_id: window.accountId
+      })
+      console.log("minted", minted)
 
       setList(minted);
       setLoading(false);
@@ -21,13 +23,13 @@ const CreatedList = ({ setSellingPage, setSellingNft }) => {
 
   return (
     <div className="created__list">
-      {list.map((nft) => (
+      {list.map((nft, index) => (
         <Card
-          key={nft.id}
-          id={nft.id}
-          image={nft.ipfsUrl}
-          title={nft.name}
-          tag={nft.minterId}
+          key={index}
+          id={nft.token_id}
+          image={nft.metadata.media}
+          title={nft.metadata.title}
+          tag={nft.owner_id}
           buttonText="SELL"
           buyVisible
           onClickBtn={() => {

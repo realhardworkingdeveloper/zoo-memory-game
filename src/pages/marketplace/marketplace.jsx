@@ -8,31 +8,46 @@ import CollectionPage from "../collection-page/collection-page";
 const Marketplace = () => {
   const ComingSoon = <h1 style={{ textAlign: "center" }}>Coming soon</h1>;
   const cls = ({ isActive }) => (isActive ? "active" : "");
+  const { REACT_APP_CONTRACT_NAME } = process.env;
+
 
   return (
     <div className="marketplace">
       <div className="marketplace__nav">
         <NavLink className={cls} to="buy">
-          BUY
+          Auction
         </NavLink>
         {/* <NavLink className={cls} to="sell">
           SELL
         </NavLink> */}
-        <NavLink className={cls} to="collection">
-          COLLECTION
-        </NavLink>
-        <NavLink className={cls} to="stake">
-          STAKE
-        </NavLink>
-        <NavLink className={cls} to="swap">
-          SWAP
-        </NavLink>
-        <NavLink className={cls} to="mint">
-          MINT
-        </NavLink>
-        <NavLink className={cls} to="created">
-          CREATED
-        </NavLink>
+        {
+          REACT_APP_CONTRACT_NAME != window.accountId && (
+            <>
+              <NavLink className={cls} to="collection">
+                Collectibles
+              </NavLink>
+              <NavLink className={cls} to="stake">
+                STAKE
+              </NavLink>
+              <NavLink className={cls} to="swap">
+                SWAP
+              </NavLink>
+            </>
+          )
+        }
+        {
+          REACT_APP_CONTRACT_NAME == window.accountId && (
+            <>
+              <NavLink className={cls} to="mint">
+                MINT
+              </NavLink>
+              <NavLink className={cls} to="created">
+                CREATED
+              </NavLink>
+            </>
+          )
+        }
+
       </div>
 
       <div className="marketplace__content">
