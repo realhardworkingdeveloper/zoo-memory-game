@@ -203,6 +203,7 @@ const GamePage = () => {
         // );
         // addTempPoints(getPointsForLevel(curLevel)); // TODO: smart contract logic for points for level
       }
+
     })()
   }, [numberOfWins, curLevel, addTempPoints]);
 
@@ -268,6 +269,7 @@ const GamePage = () => {
   if (pageLoading) return;
 
   return (
+
     <BlockUi tag="div" blocking={isNextLeveling}>
       <div className="game-page">
         <div className="game-stats">
@@ -325,6 +327,7 @@ const GamePage = () => {
         </div>
       </div>
     </BlockUi>
+    
     // <div className="gameBody">
     //   <h2>
     //     Level {curLevel} of {TOTAL_LEVELS}
@@ -361,6 +364,7 @@ const GamePage = () => {
     //     );
     //   })}
     // </div>
+
 
     //     <GameWins numberOfWins={numberOfWins} />
     //   </div>

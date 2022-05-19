@@ -1,4 +1,5 @@
 import { useFormik } from "formik";
+
 import { useEffect, useState } from "react";
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
@@ -15,6 +16,7 @@ const BN = require("bn.js");
 const MintPage = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const { accountId } = useAccount();
+
 
   useEffect(() => {
     // set up localStorage for our usage
@@ -105,6 +107,7 @@ const MintPage = () => {
         </form>
       </div>
     </BlockUi>
+
   );
 };
 
