@@ -6,12 +6,15 @@ import Big from "big.js";
 import Card from "../../components/Card";
 
 import useAccount from "../../store/account.store";
+import Bidding from "./bidding";
 
 const BuyPage = () => {
   const { accountId, coins, addCoins } = useAccount();
 
   const [loading, setLoading] = useState(true);
   const [isBuying, setIsBuying] = useState(false);
+  const [isBidding, setIsBidding] = useState(false);
+  const [biddingNft, setBiddingNft] = useState(null);
   const [buyingId, setBuyingId] = useState("");
   const [cards, setCards] = useState([]);
 
@@ -69,14 +72,24 @@ const BuyPage = () => {
     setBuyingId("");
   };
 
+  const onBid = (nft) => {
+    setIsBidding(true);
+    setBiddingNft({ ...nft });
+  };
+
   if (loading) return null;
+
+  if (isBidding) {
+    return <Bidding {...biddingNft} setBidding={setIsBidding} />;
+  }
 
   return (
     <div className="buy">
       <div className="card-list">
         {cards.map((nft, index) => (
           <Card
-            key={nft.index}
+            key={nft.auction_id}
+            type="auction"
             id={nft.tokenData.token_id}
             image={nft.tokenData.metadata.media}
             title={nft.tokenData.metadata.title}
@@ -86,17 +99,26 @@ const BuyPage = () => {
             price={utils.format.formatNearAmount(
               Big(1).times(nft.current_price).toFixed()
             )}
-            bidText="cost"
+            // TODO: add logic here for instant/bid
+            bidText={nft.auction_type === "instant" ? "buy" : "highest bid"}
             buttonText={
               isBuying && buyingId === nft.id ? "Buying..." : "Buy Now"
             }
             buyVisible={true}
-            onClickBtn={() => onBuy(nft.id, nft.buyersList || [], nft.price)}
+            onClickBtn={() => {
+              // TODO: add logic here after updating SC and data for if condition
+              if (nft.auction_type === "instant")
+                onBuy(nft.id, nft.buyersList || [], nft.price);
+              else onBid(nft);
+            }}
             btnDisabled={
               isBuying ||
               nft.price > coins ||
               nft.buyersList?.includes(accountId)
             }
+            // TODO: update auction type stuff here
+            startTime={nft.auction_type === "instant" ? 0 : nft.start_time}
+            endTime={nft.auction_type === "instant" ? 0 : nft.end_time}
           />
         ))}
       </div>

@@ -50,3 +50,20 @@ export const getAsDateTimeLocal = (date) => {
 
   return `${yyyy}-${mm}-${dd}T${hh}:${min}`;
 };
+
+export const getDaysHrsMnsSecs = (n) => {
+  n = parseInt(n);
+
+  var day = parseInt(n / (24 * 3600));
+
+  n = n % (24 * 3600);
+  var hour = parseInt(n / 3600);
+
+  n %= 3600;
+  var minutes = parseInt(n / 60);
+
+  n %= 60;
+  var seconds = parseInt(n);
+
+  return `${day}:${hour}:${minutes}:${seconds}`;
+};

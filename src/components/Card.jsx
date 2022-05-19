@@ -1,8 +1,10 @@
-import React from "react";
+import React, { memo, useState } from "react";
 import zootoken from "../assets/zootoken.png";
-import neartoken from "../assets/nearwhite1.png"
+import neartoken from "../assets/nearwhite1.png";
+import useInterval from "../hooks/use-interval";
+import { getDaysHrsMnsSecs } from "../utils/date-time";
 
-export default function Card({
+const Card = ({
   image,
   series,
   title,
@@ -15,11 +17,31 @@ export default function Card({
   onClick,
   onClickBtn,
   btnDisabled,
-})
-{
+  startTime,
+  endTime,
+  type = "marketplace",
+}) => {
+  const [timeInSeconds, setTimeInSeconds] = useState(
+    parseInt((endTime - startTime) / 1000)
+  );
+  const [timeToStart, setTimeToStart] = useState(
+    parseInt((Date.now() - startTime) / 1000)
+  );
+
   const accountInfo = () => {
     window.open(`https://explorer.testnet.near.org/accounts/${tag}`, "_blank");
   };
+
+  useInterval(() => {
+    if (startTime < Date.now()) {
+      setTimeToStart(timeToStart - 1);
+    }
+
+    if (timeInSeconds > 0) {
+      setTimeInSeconds(timeInSeconds - 1);
+    }
+  }, 1000);
+
   return (
     <div className="card">
       <div className="card-image" onClick={onClick}>
@@ -40,13 +62,25 @@ export default function Card({
           </div>
         </div>
         <div className="card-sub-details">
-          <span
-          onClick={accountInfo}
-          style={{"cursor": "pointer"}}
-          >@{tag}</span>
+          <span onClick={accountInfo} style={{ cursor: "pointer" }}>
+            @{tag}
+          </span>
           {/* <span>{time || 0} sold</span> */}
           {/* <span>#12313{time}</span> */}
         </div>
+
+        {/* TODO: update logic here for bid/instant */}
+        {type === "auction" && !!startTime && (
+          <div>
+            {endTime < Date.now() && startTime > Date.now() ? (
+              <span>Time Remaining: {getDaysHrsMnsSecs(timeInSeconds)}</span>
+            ) : startTime < Date.now() ? (
+              <span>Bid starts in {getDaysHrsMnsSecs(timeToStart)}</span>
+            ) : (
+              <span>Time expired for bid</span>
+            )}
+          </div>
+        )}
 
         <button
           className={`${buyVisible ? "" : "buy-visible"}`}
@@ -58,4 +92,6 @@ export default function Card({
       </div>
     </div>
   );
-}
+};
+
+export default memo(Card);
