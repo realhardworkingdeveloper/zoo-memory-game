@@ -4,9 +4,8 @@ import { useEffect, useState } from "react";
 import BlockUi from 'react-block-ui';
 import 'react-block-ui/style.css';
 
+import { utils } from "near-api-js";
 import { v4 } from "uuid";
-import Big from "big.js";
-
 import Button from "../../components/button/button";
 import useAccount from "../../store/account.store";
 
@@ -17,7 +16,6 @@ const BN = require("bn.js");
 const MintPage = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const { accountId } = useAccount();
-  const BOATLOAD_OF_GAS = Big(1).times(10 ** 13).toFixed();
 
 
   useEffect(() => {
@@ -58,8 +56,8 @@ const MintPage = () => {
             },
             receiver_id: accountId,
           },
-          BOATLOAD_OF_GAS, // attached GAS (optional)
-          new BN("100000000000000000000000")
+          300000000000000, // attached GAS (optional)
+          utils.format.parseNearAmount("0.1")
         );
         console.log("result", result)
         setIsProcessing(false)

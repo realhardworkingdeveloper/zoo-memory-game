@@ -44,7 +44,7 @@ export default function Card({
           style={{"cursor": "pointer"}}
           >@{tag}</span>
           {/* <span>{time || 0} sold</span> */}
-          <span>#12313{time}</span>
+          {/* <span>#12313{time}</span> */}
         </div>
 
         <button

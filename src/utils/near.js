@@ -20,8 +20,11 @@ export async function initializeContract() {
       viewMethods: [
         "get_status",
         "get_auction",
+        "get_auctioned_tokens",
+        "get_total_auction_count",
         "get_current_token_number",
-        "nft_tokens_for_owner"
+        "nft_tokens_for_owner",
+        "nft_token",
       ],
       changeMethods: [
         "set_status",

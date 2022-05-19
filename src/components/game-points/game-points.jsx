@@ -22,7 +22,7 @@ const GamePointsCounter = ({ page = "home" }) => {
           <img src="/img/point-diamond.png" alt="points" />
         </div>
         <div>
-          <span>{coins}</span>
+          <span>{coins || 0}</span>
         </div>
       </div>
     </div>
