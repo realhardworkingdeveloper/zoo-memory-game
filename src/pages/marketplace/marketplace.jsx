@@ -15,7 +15,7 @@ const Marketplace = () => {
     <div className="marketplace">
       <div className="marketplace__nav">
         <NavLink className={cls} to="buy">
-          Auction
+          AUCTION
         </NavLink>
         {/* <NavLink className={cls} to="sell">
           SELL
@@ -24,7 +24,7 @@ const Marketplace = () => {
           REACT_APP_CONTRACT_NAME != window.accountId && (
             <>
               <NavLink className={cls} to="collection">
-                Collectibles
+                COLLECTIBLES
               </NavLink>
               <NavLink className={cls} to="stake">
                 STAKE

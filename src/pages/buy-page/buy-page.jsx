@@ -69,6 +69,7 @@ const BuyPage = () => {
 
   console.log(coins);
 
+
   if (loading) return null;
 
   return (

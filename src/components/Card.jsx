@@ -1,5 +1,6 @@
 import React from "react";
 import zootoken from "../assets/zootoken.png";
+import neartoken from "../assets/nearwhite1.png"
 
 export default function Card({
   image,
@@ -14,7 +15,7 @@ export default function Card({
   onClick,
   onClickBtn,
   btnDisabled,
-}) 
+})
 {
   const accountInfo = () => {
     window.open(`https://explorer.testnet.near.org/accounts/${tag}`, "_blank");
@@ -34,12 +35,12 @@ export default function Card({
             {title}
           </h4>
           <div className="card-price">
-            <img src={zootoken} alt="super eth" />
-            <h4>{price} ZCM</h4>
+            <img src={neartoken} alt="super eth" />
+            <h4>{price} NEAR</h4>
           </div>
         </div>
         <div className="card-sub-details">
-          <span 
+          <span
           onClick={accountInfo}
           style={{"cursor": "pointer"}}
           >@{tag}</span>
