@@ -21,11 +21,13 @@ const Card = ({
   endTime,
   type = "marketplace",
 }) => {
+  const offset = new Date().getTimezoneOffset() * 60 * 1000;
+
   const [timeInSeconds, setTimeInSeconds] = useState(
     parseInt((endTime - startTime) / 1000)
   );
   const [timeToStart, setTimeToStart] = useState(
-    parseInt((Date.now() - startTime) / 1000)
+    parseInt((Date.now() + offset - startTime) / 1000) // TODO: account for timezone offset: ;
   );
 
   const accountInfo = () => {
@@ -33,7 +35,7 @@ const Card = ({
   };
 
   useInterval(() => {
-    if (startTime < Date.now()) {
+    if (timeToStart > 0) {
       setTimeToStart(timeToStart - 1);
     }
 
@@ -72,9 +74,10 @@ const Card = ({
         {/* TODO: update logic here for bid/instant */}
         {type === "auction" && !!startTime && (
           <div>
-            {endTime < Date.now() && startTime > Date.now() ? (
+            {endTime < Date.now() + offset &&
+            startTime > Date.now() + offset ? (
               <span>Time Remaining: {getDaysHrsMnsSecs(timeInSeconds)}</span>
-            ) : startTime < Date.now() ? (
+            ) : timeToStart > 0 ? (
               <span>Bid starts in {getDaysHrsMnsSecs(timeToStart)}</span>
             ) : (
               <span>Time expired for bid</span>
