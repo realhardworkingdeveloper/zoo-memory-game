@@ -82,7 +82,7 @@ const BuyPage = () => {
                 ? isBuying && buyingId === nft.id
                   ? "Buying..."
                   : "Buy Now"
-                : "Bid"
+                : "Place Bid"
             }
             buyVisible={true}
             onClickBtn={() => {

@@ -77,11 +77,11 @@ const Card = ({
         {type === "auction" && !!startTime && (
           <div>
             {endTime > Date.now() && startTime < Date.now() ? (
-              <span>Time Remaining: {getDaysHrsMnsSecs(timeInSeconds)}</span>
+              <span>{getDaysHrsMnsSecs(timeInSeconds)}</span>
             ) : timeToStart > 0 ? (
               <span>Bid starts in {getDaysHrsMnsSecs(timeToStart)}</span>
             ) : (
-              <span>Time expired for bid</span>
+              <span>Bid closed</span>
             )}
           </div>
         )}
