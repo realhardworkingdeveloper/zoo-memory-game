@@ -17,14 +17,14 @@ const GamePointsCounter = ({ page = "home" }) => {
         </div>
       </div>
 
-      <div className={classes.points}>
+      {/* <div className={classes.points}>
         <div className={classes.imgContainer}>
           <img src="/img/point-diamond.png" alt="points" />
         </div>
         <div>
           <span>{coins || 0}</span>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
