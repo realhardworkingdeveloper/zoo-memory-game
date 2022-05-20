@@ -19,7 +19,7 @@ export default function Release() {
                         Every time you pass the level you will get certain amount of crystals.
                     </p>
                     <p className="description">By owning crystals, you get ZooMemory token <a href="#">$ZMC</a></p>
-                    <a href="/game" className="link">
+                    <a href={"https://docs.google.com/document/d/1GpqHdqxN-M-Yp3T4edcLmZQtUyv_yGf5v_WPZSy07aw/edit?usp=sharing"} target="_blank" rel='noreferrer' className="link">
                         More Info <BsArrowRight />
                     </a>
                 </div>
