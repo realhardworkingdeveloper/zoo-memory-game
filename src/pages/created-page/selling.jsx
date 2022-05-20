@@ -60,8 +60,9 @@ const Selling = ({ token_id, owner_id, metadata, setSellingPage }) => {
             start_price:
               parseInt(utils.format.parseNearAmount(values.price.toString())) /
               10 ** 6,
-              start_time: new Date(values.startDate).getTime() - new Date().getTimezoneOffset() * 60 * 1000,
-              end_time: new Date(values.endDate).getTime() - new Date().getTimezoneOffset() * 60 * 1000,
+            start_time: new Date(values.startDate).getTime(),
+            // - new Date().getTimezoneOffset() * 60 * 1000,
+            end_time: new Date(values.endDate).getTime(),
             // TODO: Add variable for type of sale
           },
           300000000000000, // attached GAS (optional)
@@ -85,7 +86,7 @@ const Selling = ({ token_id, owner_id, metadata, setSellingPage }) => {
   //   timeNowWithoutThing: new Date(timeNowDateTimeLocal),
   // });
 
-  console.log(formik.errors);
+  // console.log(formik.errors);
 
   return (
     <BlockUi tag="div" blocking={isProcessing}>
@@ -170,28 +171,32 @@ const Selling = ({ token_id, owner_id, metadata, setSellingPage }) => {
               </div>
 
               {/* Date and Times */}
-              <div className="form-item">
-                <label htmlFor="startDate">Start Date:</label>
-                <input
-                  type="datetime-local"
-                  id="startDate"
-                  name="startDate"
-                  min={timeNowDateTimeLocal}
-                  value={formik.values.startDate}
-                  onChange={formik.handleChange}
-                />
-              </div>
-              <div className="form-item">
-                <label htmlFor="startDate">End Date:</label>
-                <input
-                  type="datetime-local"
-                  id="endDate"
-                  name="endDate"
-                  min={timeNowDateTimeLocal}
-                  value={formik.values.endDate}
-                  onChange={formik.handleChange}
-                />
-              </div>
+              {formik.values.typeOfSale === "bidding" && (
+                <div className="form-item">
+                  <label htmlFor="startDate">Start Date:</label>
+                  <input
+                    type="datetime-local"
+                    id="startDate"
+                    name="startDate"
+                    min={timeNowDateTimeLocal}
+                    value={formik.values.startDate}
+                    onChange={formik.handleChange}
+                  />
+                </div>
+              )}
+              {formik.values.typeOfSale === "bidding" && (
+                <div className="form-item">
+                  <label htmlFor="startDate">End Date:</label>
+                  <input
+                    type="datetime-local"
+                    id="endDate"
+                    name="endDate"
+                    min={timeNowDateTimeLocal}
+                    value={formik.values.endDate}
+                    onChange={formik.handleChange}
+                  />
+                </div>
+              )}
 
               {/* royalty in percent */}
               {/* <div className="form-item">

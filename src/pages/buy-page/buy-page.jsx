@@ -59,10 +59,10 @@ const BuyPage = () => {
     const updatedCards = [...cards].map((nft) =>
       nft.id === id
         ? {
-          ...nft,
-          buyersList: [...nft.buyersList, accountId],
-          numSold: nft.numSold + 1,
-        }
+            ...nft,
+            buyersList: [...nft.buyersList, accountId],
+            numSold: nft.numSold + 1,
+          }
         : { ...nft }
     );
     setCards(updatedCards);
@@ -102,7 +102,11 @@ const BuyPage = () => {
             // TODO: add logic here for instant/bid
             bidText={nft.auction_type === "instant" ? "buy" : "top bid"}
             buttonText={
-              isBuying && buyingId === nft.id ? "Buying..." : "Buy Now"
+              nft.auction_type === "instant"
+                ? isBuying && buyingId === nft.id
+                  ? "Buying..."
+                  : "Buy Now"
+                : "Bid"
             }
             buyVisible={true}
             onClickBtn={() => {
@@ -113,8 +117,9 @@ const BuyPage = () => {
             }}
             btnDisabled={
               isBuying ||
-              nft.price > coins ||
-              nft.buyersList?.includes(accountId)
+              (nft.auction_type === "bidding" &&
+                nft.end_time > Date.now() &&
+                nft.start_time < Date.now())
             }
             // TODO: update auction type stuff here
             startTime={nft.auction_type === "instant" ? 0 : nft.start_time}
