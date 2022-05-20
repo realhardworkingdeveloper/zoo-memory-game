@@ -61,7 +61,7 @@ const Selling = ({ token_id, owner_id, metadata, setSellingPage }) => {
               parseInt(utils.format.parseNearAmount(values.price.toString())) /
               10 ** 6,
               start_time: new Date(values.startDate).getTime() - new Date().getTimezoneOffset() * 60 * 1000,
-  end_time: new Date(values.endDate).getTime() - new Date().getTimezoneOffset() * 60 * 1000,
+              end_time: new Date(values.endDate).getTime() - new Date().getTimezoneOffset() * 60 * 1000,
             // TODO: Add variable for type of sale
           },
           300000000000000, // attached GAS (optional)
