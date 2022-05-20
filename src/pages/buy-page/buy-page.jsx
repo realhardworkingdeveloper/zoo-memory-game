@@ -59,10 +59,10 @@ const BuyPage = () => {
     const updatedCards = [...cards].map((nft) =>
       nft.id === id
         ? {
-            ...nft,
-            buyersList: [...nft.buyersList, accountId],
-            numSold: nft.numSold + 1,
-          }
+          ...nft,
+          buyersList: [...nft.buyersList, accountId],
+          numSold: nft.numSold + 1,
+        }
         : { ...nft }
     );
     setCards(updatedCards);
@@ -100,7 +100,7 @@ const BuyPage = () => {
               Big(1).times(nft.current_price).toFixed()
             )}
             // TODO: add logic here for instant/bid
-            bidText={nft.auction_type === "instant" ? "buy" : "highest bid"}
+            bidText={nft.auction_type === "instant" ? "buy" : "top bid"}
             buttonText={
               isBuying && buyingId === nft.id ? "Buying..." : "Buy Now"
             }

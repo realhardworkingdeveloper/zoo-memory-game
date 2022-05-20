@@ -12,6 +12,10 @@
   align-items: center;
 }
 
+span {
+  color: var(--accent-color3);
+}
+
 .imgContainer {
   width: 1.5rem;
   height: 2rem;

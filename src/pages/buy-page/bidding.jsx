@@ -45,7 +45,7 @@ const Bidding = ({ setBidding, ...biddingNft }) => {
               image={biddingNft.tokenData.metadata.media}
               title={biddingNft.tokenData.metadata.title}
               tag={biddingNft.owner}
-              // series={rarity}
+            // series={rarity}
             />
           </div>
 
@@ -71,7 +71,7 @@ const Bidding = ({ setBidding, ...biddingNft }) => {
             disabled={formik.isSubmitting}
             onClick={formik.submitForm}
           >
-            SELL
+            BID
           </Button>
           <button
             className="btn"

@@ -71,7 +71,10 @@ export default function Navbar({ changeTheme, currentTheme }) {
             </Link>
           </li>
           <li>
-            <a href="#launch">How to Play</a>
+            <a href={"https://docs.google.com/document/d/1GpqHdqxN-M-Yp3T4edcLmZQtUyv_yGf5v_WPZSy07aw/edit?usp=sharing"} target={"_blank"}>Litepaper</a>
+          </li>
+          <li>
+            <a href="#howto">How to Play</a>
           </li>
           <li>
             <a href="#newsletter">Newsletter</a>
@@ -80,8 +83,8 @@ export default function Navbar({ changeTheme, currentTheme }) {
             <div className="accountInfo">
               {isWalletConnected ? (
                 <div className="walletDiv">
-                <button className="wallet" onClick={accountInfo}>{accountId}</button>
-                <MdLogout size={20} onClick={loginLogout}/>
+                  <button className="wallet" onClick={accountInfo}>{accountId}</button>
+                  <MdLogout size={20} onClick={loginLogout} />
                 </div>
               ) : (
                 <button className="wallet" onClick={loginLogout}>Connect Near</button>

@@ -7,7 +7,7 @@ import Card from './Card'
 
 export default function Release() {
     return (
-        <div className="releases">
+        <div className="releases" id="howto">
             <div className="release orange">
                 <div className="content">
                     <h2 className="title">How to Play?</h2>
@@ -19,7 +19,7 @@ export default function Release() {
                         Every time you pass the level you will get certain amount of crystals.
                     </p>
                     <p className="description">By owning crystals, you get ZooMemory token <a href="#">$ZMC</a></p>
-                    <a href="#" className="link">
+                    <a href="/game" className="link">
                         More Info <BsArrowRight />
                     </a>
                 </div>
@@ -53,7 +53,7 @@ export default function Release() {
 
                     </p>
                     <p className="description">50% of royalties will go to zoos.</p>
-                    <a href="#" className="link">
+                    <a href="/marketplace" className="link">
                         Help Zoos <BsArrowRight />
                     </a>
                 </div>
