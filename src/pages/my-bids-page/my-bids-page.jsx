@@ -6,21 +6,16 @@ import Big from "big.js";
 import Card from "../../components/Card";
 
 import useAccount from "../../store/account.store";
-import Bidding from "./bidding";
 
-const BuyPage = () => {
+const MyBidsPage = () => {
   const { accountId, coins, addCoins } = useAccount();
 
   const [loading, setLoading] = useState(true);
-  const [isBuying, setIsBuying] = useState(false);
-  const [isBidding, setIsBidding] = useState(false);
-  const [biddingNft, setBiddingNft] = useState(null);
-  const [buyingId, setBuyingId] = useState("");
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
     (async () => {
-      // TODO: SC calls to fetch list of marketplace stuff, using localStorage as dummy
+      // TODO: SC calls to fetch list of USER'S BIDS - IMPORTANT
       const totalAuctionCount = await window.contract.get_total_auction_count();
       const array = Array(totalAuctionCount).fill(0);
       console.log("array", array);
@@ -41,23 +36,14 @@ const BuyPage = () => {
   }, []);
 
   const onBuy = async (id, buyersList, price) => {
-    // TODO: instant auction buy logic here
+    // TODO: add logic here to claim NFT of which user has won bid
 
     console.log({ buyersList, coins, price, accountId });
     alert("Coming soon!");
     return;
   };
 
-  const onBid = (nft) => {
-    setIsBidding(true);
-    setBiddingNft({ ...nft });
-  };
-
   if (loading) return null;
-
-  if (isBidding) {
-    return <Bidding {...biddingNft} setBidding={setIsBidding} />;
-  }
 
   return (
     <div className="buy">
@@ -77,26 +63,14 @@ const BuyPage = () => {
             )}
             // TODO: add logic here for instant/bid
             bidText={nft.auction_type === "instant" ? "buy" : "top bid"}
-            buttonText={
-              nft.auction_type === "instant"
-                ? isBuying && buyingId === nft.id
-                  ? "Buying..."
-                  : "Buy Now"
-                : "Bid"
+            buttonText="Claim NFT"
+            buyVisible={
+              Date.now() > nft.end_time && nft.winner_id === accountId
             }
-            buyVisible={true}
             onClickBtn={() => {
-              // TODO: add logic here after updating SC and data for if condition
-              if (nft.auction_type === "instant")
-                onBuy(nft.id, nft.buyersList || [], nft.price);
-              else onBid(nft);
+              // TODO: REPLACE ONBUY with any ONCLAIMNFT function u make
+              onBuy();
             }}
-            btnDisabled={
-              isBuying ||
-              (nft.auction_type === "bidding" &&
-                nft.end_time > Date.now() &&
-                nft.start_time < Date.now())
-            }
             // TODO: update auction type stuff here
             startTime={nft.auction_type === "instant" ? 0 : nft.start_time}
             endTime={nft.auction_type === "instant" ? 0 : nft.end_time}
@@ -107,4 +81,4 @@ const BuyPage = () => {
   );
 };
 
-export default BuyPage;
+export default MyBidsPage;
