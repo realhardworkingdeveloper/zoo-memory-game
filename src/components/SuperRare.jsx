@@ -55,7 +55,7 @@ export default function SuperRare() {
                 <h2 className="title">ZooMemory Marketplace</h2>
                 <p className="description">
                     We have released four limited edition NFT's early which can be
-                    bought in our <a href="#">Marketplace</a>.
+                    bought in our <a href="/marketplace">Marketplace</a>.
                 </p>
             </div>
             <div className="cards">
